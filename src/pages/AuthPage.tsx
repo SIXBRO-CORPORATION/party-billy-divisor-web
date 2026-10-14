@@ -21,7 +21,6 @@ import { useToast } from '../hooks/useToast.ts';
 
 type AuthMode = 'login' | 'register';
 
-
 const RECEIPT_ITEMS = [
     { name: '1x Pizza grande', price: '78,00' },
     { name: '6x Chopp', price: '66,00' },
@@ -36,9 +35,8 @@ export default function AuthPage() {
     const location = useLocation();
     const toast = useToast();
 
-    const [mode, setMode] = useState<AuthMode>(() =>
-        location.pathname.startsWith('/register') ? 'register' : 'login'
-    );
+    const mode: AuthMode = location.pathname.startsWith('/register') ? 'register' : 'login';
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -65,7 +63,6 @@ export default function AuthPage() {
     );
 
     function handleModeChange(nextMode: AuthMode) {
-        setMode(nextMode);
         navigate(nextMode === 'register' ? '/register' : '/login', { replace: true });
     }
 
@@ -114,8 +111,7 @@ export default function AuthPage() {
                 <h1 className="auth-hero-title">
                     A conta chegou.
                     <br />
-                    Quem pagou
-                    <br />o quê?
+                    Quem pagou o quê?
                 </h1>
 
                 <p className="auth-hero-subtitle">
