@@ -1,7 +1,9 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.ts';
+import { Avatar } from '../ui/Avatar.tsx';
 import { Button } from '../ui/Button.tsx';
 import { HomeIcon, ListIcon, LogoutIcon } from '../ui/icons.tsx';
+import { Logo } from '../ui/Logo.tsx';
 import { QuickScanFab } from './QuickScanFab.tsx';
 
 export function Layout() {
@@ -13,17 +15,11 @@ export function Layout() {
         navigate('/login', { replace: true });
     }
 
-    const initial = (user?.name ?? user?.email ?? '?').trim().charAt(0).toUpperCase();
-
     return (
         <div className="app-shell">
             <header className="app-topbar">
                 <Link className="brand" to="/">
-                    <span className="brand-mark" aria-hidden="true">
-                        <span className="brand-mark-half brand-mark-a" />
-                        <span className="brand-mark-half brand-mark-b" />
-                    </span>
-                    <span className="brand-name">Racha</span>
+                    <Logo size={30} />
                 </Link>
 
                 <nav className="app-nav app-nav-desktop">
@@ -35,9 +31,7 @@ export function Layout() {
                 </nav>
 
                 <div className="app-user">
-                    <span className="avatar" title={user?.email ?? ''}>
-                        {initial}
-                    </span>
+                    <Avatar label={user?.name ?? user?.email ?? '?'} size="sm" />
 
                     <span className="app-user-name">{user?.name ?? user?.email}</span>
 

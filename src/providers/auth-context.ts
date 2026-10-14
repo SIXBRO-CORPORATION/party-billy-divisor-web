@@ -6,7 +6,7 @@ export interface AuthContextData {
     user: User | null;
     isLoading: boolean;
     isAuthenticated: boolean;
-    login: (credentials: LoginRequest) => Promise<void>;
+    login: (credentials: LoginRequest, options?: { remember?: boolean }) => Promise<void>;
     register: (payload: RegisterRequest) => Promise<void>;
     logout: () => void;
     refetch: () => Promise<void>;

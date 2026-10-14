@@ -4,7 +4,7 @@ import type { AuthResponse, LoginRequest, RegisterRequest } from '../types/auth.
 import type { User } from '../types/user.ts';
 
 export const authService = {
-    login: async (credentials: LoginRequest): Promise<AuthResponse> => {
+    login: async (credentials: LoginRequest, remember: boolean = true): Promise<AuthResponse> => {
         const response = await httpClient.post<AuthResponse>(
             '/auth/login',
             credentials,
@@ -12,7 +12,7 @@ export const authService = {
         );
 
         if (response.data) {
-            tokenManager.setToken(response.data.access_token, response.data.expires_at);
+            tokenManager.setToken(response.data.access_token, response.data.expires_at, remember);
         }
 
         return response.data!;

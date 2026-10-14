@@ -29,7 +29,7 @@
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
 
-  --sans: 'Nunito', 'Segoe UI', system-ui, Roboto, sans-serif;
+  --sans: 'Inter', 'Segoe UI', system-ui, Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 16px/150% var(--sans);

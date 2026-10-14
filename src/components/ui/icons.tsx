@@ -113,3 +113,76 @@ export function ClockIcon(props: IconProps) {
         </svg>
     );
 }
+
+export function CheckIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)} strokeWidth={3.6}>
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+        </svg>
+    );
+}
+
+export function MailIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <rect x="3" y="5" width="18" height="14" rx="3" />
+            <path d="M3.5 7.5l8.5 6 8.5-6" />
+        </svg>
+    );
+}
+
+export function LockIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <rect x="5" y="11" width="14" height="9" rx="2.5" />
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        </svg>
+    );
+}
+
+export function EyeIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" />
+            <circle cx="12" cy="12" r="3" />
+        </svg>
+    );
+}
+
+export function EyeOffIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M3 3l18 18" />
+            <path d="M10.6 5.6A10.6 10.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a16.7 16.7 0 0 1-3.2 4.1M6.6 6.6C4.1 8.2 2.5 12 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 3.4-.62" />
+            <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+        </svg>
+    );
+}
+
+export function GoogleLogo({ size = 20 }: { size?: number }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                fill="#4285F4"
+                d="M22 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.6a4.8 4.8 0 0 1-2.1 3.1v2.6h3.4c2-1.8 3.1-4.5 3.1-7.6z"
+            />
+            <path
+                fill="#34A853"
+                d="M12 22.5c2.8 0 5.2-.9 6.9-2.5l-3.4-2.6c-.9.6-2.1 1-3.5 1-2.7 0-5-1.8-5.8-4.3H2.7v2.7A10.5 10.5 0 0 0 12 22.5z"
+            />
+            <path fill="#FBBC05" d="M6.2 14.1a6.3 6.3 0 0 1 0-4.2V7.2H2.7a10.5 10.5 0 0 0 0 9.6z" />
+            <path
+                fill="#EA4335"
+                d="M12 6.1c1.5 0 2.9.5 4 1.6l3-3A10.5 10.5 0 0 0 2.7 7.2l3.5 2.7C7 7.9 9.3 6.1 12 6.1z"
+            />
+        </svg>
+    );
+}
+
+export function AppleLogo({ size = 20 }: { size?: number }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#1B1511" aria-hidden="true">
+            <path d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.8.9-3.5 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7 1.3 0 1.7.7 2.8.7 1.2 0 1.9-1 2.6-2.1.8-1.2 1.2-2.3 1.2-2.4 0 0-2.3-.9-2.3-3.4zM14.3 6.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 1.9-.5 2.5-1.2z" />
+        </svg>
+    );
+}

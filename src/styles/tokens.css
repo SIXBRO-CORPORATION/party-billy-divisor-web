@@ -1,0 +1,54 @@
+
+:root {
+    --cream: #fff4e6;
+    --bg: #faf6f1;
+    --surface: #ffffff;
+    --soft: #f4eee7;
+    --line: #ebe2d8;
+    --line2: #e4d9ce;
+
+    --ink: #1b1511;
+    --ink2: #3a302a;
+    --muted: #6f645b;
+    --muted2: #8c8076;
+
+    --orange: #ff6a13;
+    --orange-600: #e5530a;
+    --orange-d: #b93c00;
+    --orange-t: #ffe6d3;
+    --orange-l: #ff9a55;
+
+    --green: #12b76a;
+    --green-d: #0b7a4b;
+    --green-t: #d8f5e5;
+    --green-l: #34d399;
+
+    --yellow: #ffb224;
+    --yellow-t: #fff1d0;
+    --yellow-d: #8a5a00;
+
+    --red: #d92d20;
+    --red-t: #fee4e2;
+    --red-d: #b42318;
+
+    --sh-sm: 0 2px 8px rgba(80, 40, 0, 0.08);
+    --sh: 0 4px 14px rgba(80, 40, 0, 0.07);
+    --sh-lg: 0 14px 36px rgba(80, 40, 0, 0.13);
+
+    --r-sm: 12px;
+    --r-md: 16px;
+    --r-lg: 18px;
+    --r-xl: 24px;
+
+    --font-body: 'Inter', 'Noto Color Emoji', sans-serif;
+    --font-display: 'Inter', 'Noto Color Emoji', sans-serif;
+}
+
+.tn {
+    font-variant-numeric: tabular-nums;
+}
+
+.disp {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+}

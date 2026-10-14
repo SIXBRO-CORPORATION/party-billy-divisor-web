@@ -78,8 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
     }, []);
 
-    const login = useCallback(async (credentials: LoginRequest) => {
-        const auth = await authService.login(credentials);
+    const login = useCallback(async (credentials: LoginRequest, options?: { remember?: boolean }) => {
+        const auth = await authService.login(credentials, options?.remember ?? true);
 
         setUser(auth.user);
         setIsAuthenticated(true);
