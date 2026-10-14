@@ -1,3 +1,20 @@
+/**
+ * Componentes genéricos do novo design system (docs/system-design).
+ * Cada bloco corresponde a um componente em src/components/ui/.
+ * Usa exclusivamente as variáveis de src/styles/tokens.css.
+ */
+
+/* ---------- utilitárias ---------- */
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.g10 {
+    gap: 10px;
+}
+
 
 .ds-logo {
     display: inline-flex;

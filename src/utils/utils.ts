@@ -38,6 +38,29 @@ export function formatDate(value?: string | null): string {
     });
 }
 
+/** Ex.: "sex, 2 out" — usado nas linhas de conta da página inicial. */
+export function formatShortDate(value?: string | null): string {
+    if (!value) {
+        return "";
+    }
+
+    const parsed = new Date(value);
+
+    if (isNaN(parsed.getTime())) {
+        return "";
+    }
+
+    return parsed.toLocaleDateString("pt-BR", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+    });
+}
+
+export function capitalize(value: string): string {
+    return value.length > 0 ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+}
+
 export function roundMoney(value: number): number {
     return Math.round(value * 100) / 100;
 }

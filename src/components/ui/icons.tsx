@@ -179,6 +179,50 @@ export function GoogleLogo({ size = 20 }: { size?: number }) {
     );
 }
 
+export function SearchIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="M20 20l-4.2-4.2" />
+        </svg>
+    );
+}
+
+export function BellIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z" />
+            <path d="M10 21h4" />
+        </svg>
+    );
+}
+
+export function UserCircleIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-3.8 3.6-6 8-6s8 2.2 8 6" />
+        </svg>
+    );
+}
+
+export function HelpCircleIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.8-2.5 2.2-2.5 3.9M12 17.3v.1" />
+        </svg>
+    );
+}
+
+export function ChevronRightIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M9 5l7 7-7 7" />
+        </svg>
+    );
+}
+
 export function AppleLogo({ size = 20 }: { size?: number }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="#1B1511" aria-hidden="true">
