@@ -1,0 +1,145 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Racha</title><style>
+:root{
+--cream:#FFF4E6;--bg:#FAF6F1;--surface:#FFFFFF;--soft:#F4EEE7;--line:#EBE2D8;--line2:#E4D9CE;
+--ink:#1B1511;--ink2:#3A302A;--muted:#6F645B;--muted2:#8C8076;
+--orange:#FF6A13;--orange-600:#E5530A;--orange-d:#B93C00;--orange-t:#FFE6D3;--orange-l:#FF9A55;
+--green:#12B76A;--green-d:#0B7A4B;--green-t:#D8F5E5;--green-l:#34D399;
+--yellow:#FFB224;--yellow-t:#FFF1D0;--yellow-d:#8A5A00;
+--red:#D92D20;--red-t:#FEE4E2;--red-d:#B42318;
+--sh-sm:0 2px 8px rgba(80,40,0,.08);--sh:0 4px 14px rgba(80,40,0,.07);--sh-lg:0 14px 36px rgba(80,40,0,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;font-size:15px;line-height:1.3}
+.disp{font-family:'Inter Display','Inter','Noto Color Emoji',sans-serif;letter-spacing:-.035em}
+.tn{font-variant-numeric:tabular-nums}
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter Display','Inter',sans-serif;font-weight:800;flex:none}
+.muted{color:var(--muted)}
+.row{display:flex;align-items:center}
+.col{display:flex;flex-direction:column}
+.g4{gap:4px}.g6{gap:6px}.g8{gap:8px}.g10{gap:10px}.g12{gap:12px}.g16{gap:16px}.g20{gap:20px}
+.grow{flex:1;min-width:0}
+.bold{font-weight:800}
+
+/* tipografia */
+.h-display{font:900 38px/1.04 'Inter Display';letter-spacing:-.04em;word-spacing:.06em}
+.h1{font:800 27px/1.1 'Inter Display';letter-spacing:-.035em;word-spacing:.04em}
+.h2{font:800 20px/1.15 'Inter Display';letter-spacing:-.03em;word-spacing:.03em}
+.h3{font:800 16px/1.2 'Inter Display';letter-spacing:-.02em}
+.body{font-size:15px;font-weight:500}
+.sm{font-size:13px;font-weight:600;color:var(--muted)}
+.cap{font-size:12px;font-weight:700;color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* superfícies */
+.card{background:#fff;border-radius:18px;box-shadow:var(--sh)}
+.card-xl{background:#fff;border-radius:24px;box-shadow:var(--sh)}
+.tile{border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.t-or{background:var(--orange-t)}.t-gr{background:var(--green-t)}.t-yl{background:var(--yellow-t)}.t-soft{background:var(--soft)}
+.rbtn{width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:var(--sh-sm);display:flex;align-items:center;justify-content:center;flex:none}
+
+/* botões */
+.btn{height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;font:800 16px/1 'Inter Display';letter-spacing:-.01em;border:0;white-space:nowrap}
+.btn.sm2{height:40px;border-radius:14px;font-size:14px;padding:0 16px}
+.btn.or{background:var(--orange);color:var(--ink);box-shadow:0 10px 22px rgba(255,106,19,.30)}
+.btn.gr{background:var(--green-d);color:#fff;box-shadow:0 10px 22px rgba(11,122,75,.26)}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.soft{background:var(--soft);color:var(--ink)}
+.btn.line{background:#fff;border:1.5px solid var(--line2);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* pílulas / chips */
+.pill{height:26px;padding:0 10px;border-radius:13px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:none}
+.p-or{background:var(--orange-t);color:var(--orange-d)}
+.p-gr{background:var(--green-t);color:var(--green-d)}
+.p-yl{background:var(--yellow-t);color:var(--yellow-d)}
+.p-rd{background:var(--red-t);color:var(--red-d)}
+.p-ink{background:var(--ink);color:#fff}
+.chip{height:34px;padding:0 14px;border-radius:17px;background:#fff;border:1.5px solid var(--line2);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex:none}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* campos */
+.fld>label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.inp{height:52px;border-radius:16px;background:#fff;border:1.5px solid var(--line2);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:16px;font-weight:600;color:var(--ink)}
+.inp.focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,19,.18)}
+.inp .ph{color:var(--muted)}
+.inp svg{color:var(--muted)}
+.seg{display:flex;background:var(--soft);border-radius:16px;padding:4px;height:46px}
+.seg>div{flex:1;display:flex;align-items:center;justify-content:center;border-radius:12px;font:800 14px 'Inter Display';color:var(--muted)}
+.seg>div.on{background:#fff;color:var(--ink);box-shadow:var(--sh-sm)}
+.tog{width:46px;height:28px;border-radius:14px;background:#D9CFC4;position:relative;flex:none}
+.tog::after{content:'';position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.tog.on{background:var(--green-d)}.tog.on::after{left:21px}
+.prog{height:10px;border-radius:5px;background:rgba(27,21,17,.14);overflow:hidden}
+.prog>i{display:block;height:100%;border-radius:5px;background:var(--ink)}
+.steps{display:flex;gap:6px;flex:1}
+.steps i{height:6px;border-radius:3px;background:var(--line2);flex:1}
+.steps i.on{background:var(--orange)}
+
+/* mobile */
+.m{width:390px;height:844px;position:relative;overflow:hidden;background:var(--bg)}
+.sb{height:54px;padding:19px 30px 0;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:15px;position:relative;z-index:20}
+.sb .r{display:flex;gap:6px;align-items:center}
+.hi{position:absolute;bottom:8px;left:128px;width:134px;height:5px;border-radius:3px;background:var(--ink);z-index:30}
+.top{display:flex;align-items:center;gap:14px;padding:6px 20px 0}
+.cta{position:absolute;left:0;right:0;bottom:0;padding:34px 20px 30px;background:linear-gradient(180deg,rgba(250,246,241,0),var(--bg) 38%);z-index:10}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:86px;background:#fff;border-radius:26px 26px 0 0;box-shadow:0 -6px 24px rgba(80,40,0,.08);display:flex;justify-content:space-around;align-items:flex-start;padding:10px 24px 0;z-index:15}
+.tab{width:84px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:700;color:var(--muted)}
+.tab.on{color:var(--ink)}
+.tab .ib{width:52px;height:30px;border-radius:15px;display:flex;align-items:center;justify-content:center}
+.tab.on .ib{background:var(--orange-t)}
+.fab{width:58px;height:58px;border-radius:20px;background:var(--orange);display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 12px 24px rgba(255,106,19,.38)}
+
+.g{width:1280px;padding:56px 64px 64px;background:var(--bg)}
+.gh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.gt{font:900 52px/1 'Inter Display';letter-spacing:-.045em;word-spacing:.04em}
+.sec{margin-top:44px}
+.sec>.eyebrow{margin-bottom:6px}
+.sec>.h2{margin-bottom:18px;font-size:24px}
+.sw{background:#fff;border-radius:18px;box-shadow:var(--sh);overflow:hidden}
+.sw .c{height:84px;display:flex;align-items:flex-end;padding:10px 12px;font:800 13px 'Inter Display'}
+.sw .i{padding:10px 12px 12px}
+.sw .n{font:800 14px 'Inter Display'}
+.sw .t{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+.grid{display:grid;gap:16px}
+.rule{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--sh);font-size:14px;font-weight:600;line-height:1.45}
+.rule b{font-family:'Inter Display';font-weight:800}
+.ok{border-left:5px solid var(--green-d)}.no{border-left:5px solid var(--red)}
+.lbl{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.demo{background:#fff;border-radius:22px;padding:22px;box-shadow:var(--sh)}
+.cr{display:grid;grid-template-columns:90px 1.3fr 1fr 80px 140px;align-items:center;gap:14px;padding:10px 16px;border-top:1.5px solid var(--line);font-size:14px;font-weight:600}
+</style></head><body style="width:1280px;"><div class="g"><div class="gh"><div><div class="row g12" style="margin-bottom:18px"><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="32" viewBox="0 0 100 100" style="flex:none"><g transform="translate(-3.5,-3.5)"><path d="M50 18A32 32 0 0 0 50 82Z" fill="#FF6A13"/></g><g transform="translate(3.5,3.5)"><path d="M50 18A32 32 0 0 1 50 82Z" fill="#12B76A"/></g></svg><span style="font:800 26px/1 'Inter Display';letter-spacing:-.045em;color:#1B1511">racha</span></div><span class="pill p-ink">Guia de estilo</span></div><div class="gt">Componentes</div>
+ <div class="sm" style="font-size:16px;margin-top:12px;max-width:640px">Peças reutilizáveis das 24 telas. Dimensões em px de layout (mobile 390 de largura; web 1440).</div></div></div>
+<div class="grid" style="grid-template-columns:1fr 1fr 1fr;align-items:start">
+ <div class="col g16"><div class="demo"><div class="lbl">Botões · altura 52 · raio 18</div><div class="col g12">
+ <div class="btn or">Continuar</div>
+ <div class="btn gr"><svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="color:#fff;flex:none"><path d="M16 3.2C8.9 3.2 3.2 8.8 3.2 15.8c0 2.4.7 4.7 1.9 6.6L3.5 28.8l6.6-1.6c1.8 1 3.8 1.5 5.9 1.5 7.1 0 12.8-5.6 12.8-12.6S23.1 3.2 16 3.2z"/><path d="M11.6 9.8c.4-.4 1-.3 1.3.2l1 2c.2.4.1.8-.2 1.1l-.7.7c.9 1.7 2.2 3 3.9 3.9l.7-.7c.3-.3.7-.4 1.1-.2l2 1c.5.3.6.9.2 1.3-1 1.2-2.5 1.7-4.1 1.2-3.6-1.2-6.2-3.8-7.4-7.4-.4-1.5 0-3 1.2-4.1z" fill="currentColor" stroke="none"/></svg>Enviar no WhatsApp</div>
+ <div class="btn ink">Copiar</div>
+ <div class="btn soft">Mais opções</div>
+ <div class="btn line"><svg width="20" height="20" viewBox="0 0 24 24" style="flex:none"><path fill="#4285F4" d="M22 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.6a4.8 4.8 0 0 1-2.1 3.1v2.6h3.4c2-1.8 3.1-4.5 3.1-7.6z"/><path fill="#34A853" d="M12 22.5c2.8 0 5.2-.9 6.9-2.5l-3.4-2.6c-.9.6-2.1 1-3.5 1-2.7 0-5-1.8-5.800-4.300H2.700v2.700A10.500 10.500 0 0 0 12 22.500z"/><path fill="#FBBC05" d="M6.200 14.100a6.300 6.300 0 0 1 0-4.200V7.200H2.700a10.500 10.500 0 0 0 0 9.600z"/><path fill="#EA4335" d="M12 6.100c1.500 0 2.900.5 4 1.600l3-3A10.500 10.500 0 0 0 2.700 7.200l3.500 2.700C7 7.900 9.300 6.100 12 6.100z"/></svg>Continuar com Google</div>
+ <div class="btn" style="background:var(--soft);color:var(--muted2);opacity:.9">Continuar (desativado)</div></div><div class="sm" style="font-size:13px;margin-top:12px">Laranja avança o fluxo. Verde profundo movimenta dinheiro. Versão pequena: altura 40, raio 14.</div></div><div class="demo"><div class="lbl">Pílulas e chips</div><div class="col g16"><div class="row g8" style="flex-wrap:wrap"><span class="pill p-or"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B93C00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pendente</span><span class="pill p-gr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Pago</span>
+ <span class="pill p-gr">Tudo pago</span><span class="pill p-or">1 de 3 pagaram</span><span class="pill p-yl">Em análise</span><span class="pill p-rd">Falhou</span><span class="pill p-ink">Você</span></div>
+ <div class="row g8"><div class="chip on">Todas</div><div class="chip">Em aberto</div><div class="chip">Pagas</div></div>
+ <div class="row g8"><div class="chip" style="padding:0 12px 0 5px;height:34px"><div class="av" style="width:24px;height:24px;background:#FF9A55;color:#1B1511;font-size:10px">F</div>Fê</div><div class="chip" style="padding:0 12px 0 5px"><div class="av" style="width:24px;height:24px;background:#34D399;color:#1B1511;font-size:10px">G</div>Gabi</div></div></div><div class="sm" style="font-size:13px;margin-top:12px">Pílula: altura 26, texto 12/800. Sempre ícone + texto.</div></div></div>
+ <div class="col g16"><div class="demo"><div class="lbl">Campos · altura 52 · raio 16</div><div class="col g12">
+ <div class="fld"><label>Nome da conta</label><div class="inp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span class="ph">Ex.: Rolê de sexta</span></div></div>
+ <div class="fld"><label>Nome da conta</label><div class="inp focus"><span>Rolê de sexta</span><span style="width:2px;height:22px;background:var(--orange);margin-left:-8px"></span></div></div>
+ <div class="fld"><label>WhatsApp</label><div class="inp" style="border-color:var(--red);box-shadow:0 0 0 4px rgba(217,45,32,.12)"><svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="#B42318" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="color:#B42318;flex:none"><path d="M16 3.2C8.9 3.2 3.2 8.8 3.2 15.8c0 2.4.7 4.7 1.9 6.6L3.5 28.8l6.6-1.6c1.8 1 3.8 1.5 5.9 1.5 7.1 0 12.8-5.6 12.8-12.6S23.1 3.2 16 3.2z"/><path d="M11.6 9.8c.4-.4 1-.3 1.3.2l1 2c.2.4.1.8-.2 1.1l-.7.7c.9 1.7 2.2 3 3.9 3.9l.7-.7c.3-.3.7-.4 1.1-.2l2 1c.5.3.6.9.2 1.3-1 1.2-2.5 1.7-4.1 1.2-3.6-1.2-6.2-3.8-7.4-7.4-.4-1.5 0-3 1.2-4.1z" fill="currentColor" stroke="none"/></svg><span>(85) 9 0000</span></div><div style="font-size:12px;font-weight:700;color:var(--red-d);margin-top:6px">Faltam dígitos no número.</div></div></div><div class="sm" style="font-size:13px;margin-top:12px">Estados: padrão, foco (anel laranja 4px) e erro (vermelho + mensagem).</div></div><div class="demo"><div class="lbl">Controles</div><div class="col g16"><div class="seg"><div class="on">Entrar</div><div>Criar conta</div></div>
+ <div class="row g16"><div class="tog on"></div><div class="tog"></div><div class="row g8"><div class="chk on"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div class="chk"></div></div></div>
+ <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+ <div class="prog" style="background:var(--soft)"><i style="width:36%;background:var(--orange)"></i></div></div><div class="sm" style="font-size:13px;margin-top:12px">Segmentado, toggle (verde profundo), caixa de seleção, passos do fluxo e barra de progresso.</div></div><div class="demo"><div class="lbl">Marcar quem consumiu</div><div class="row g10"><div style="position:relative"><div class="av" style="width:40px;height:40px;background:#FF6A13;color:#1B1511;font-size:17px;">A</div><div style="position:absolute;right:-4px;bottom:-4px;width:17px;height:17px;border-radius:50%;background:var(--green-d);border:2px solid #fff;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div><div style="position:relative"><div class="av" style="width:40px;height:40px;background:#12B76A;color:#1B1511;font-size:17px;">B</div><div style="position:absolute;right:-4px;bottom:-4px;width:17px;height:17px;border-radius:50%;background:var(--green-d);border:2px solid #fff;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div><div class="av" style="width:40px;height:40px;border:1.5px dashed #BDB1A5;color:var(--muted);font-size:16px;background:#fff">C</div><div class="av" style="width:40px;height:40px;border:1.5px dashed #BDB1A5;color:var(--muted);font-size:16px;background:#fff">D</div></div><div class="sm" style="font-size:13px;margin-top:12px">Marcado = cor cheia + check. Não marcado = tracejado cinza.</div></div><div class="demo"><div class="lbl">Avatares e marca</div><div class="col g16"><div class="row g12"><div class="av" style="width:64px;height:64px;background:#FF6A13;color:#1B1511;font-size:27px;">A</div><div class="av" style="width:44px;height:44px;background:#12B76A;color:#1B1511;font-size:18px;">B</div><div class="av" style="width:36px;height:36px;background:#FFB224;color:#1B1511;font-size:15px;">C</div><div class="av" style="width:24px;height:24px;background:#0B7A4B;color:#FFFFFF;font-size:10px;">D</div><div style="flex:1"></div><div class="stack" style="display:flex"><div style="margin-left:0px"><div class="av" style="width:40px;height:40px;background:#FF6A13;color:#1B1511;font-size:17px;box-shadow:0 0 0 3px #fff;">A</div></div><div style="margin-left:-8px"><div class="av" style="width:40px;height:40px;background:#12B76A;color:#1B1511;font-size:17px;box-shadow:0 0 0 3px #fff;">B</div></div><div style="margin-left:-8px"><div class="av" style="width:40px;height:40px;background:#FFB224;color:#1B1511;font-size:17px;box-shadow:0 0 0 3px #fff;">C</div></div><div style="margin-left:-8px"><div class="av" style="width:40px;height:40px;background:#0B7A4B;color:#FFFFFF;font-size:17px;box-shadow:0 0 0 3px #fff;">D</div></div></div></div>
+ <div class="row g16"><div style="display:flex;align-items:center;gap:10px"><svg width="34" height="34" viewBox="0 0 100 100" style="flex:none"><g transform="translate(-3.5,-3.5)"><path d="M50 18A32 32 0 0 0 50 82Z" fill="#FF6A13"/></g><g transform="translate(3.5,3.5)"><path d="M50 18A32 32 0 0 1 50 82Z" fill="#12B76A"/></g></svg><span style="font:800 28px/1 'Inter Display';letter-spacing:-.045em;color:#1B1511">racha</span></div><div style="width:56px;height:56px;border-radius:17px;background:#fff;box-shadow:var(--sh);display:flex;align-items:center;justify-content:center"><svg width="40" height="40" viewBox="0 0 100 100" style="flex:none"><g transform="translate(-3.5,-3.5)"><path d="M50 18A32 32 0 0 0 50 82Z" fill="#FF6A13"/></g><g transform="translate(3.5,3.5)"><path d="M50 18A32 32 0 0 1 50 82Z" fill="#12B76A"/></g></svg></div><div style="width:56px;height:56px;border-radius:17px;background:var(--orange);display:flex;align-items:center;justify-content:center"><div style="width:40px;height:40px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 100 100" style="flex:none"><g transform="translate(-3.5,-3.5)"><path d="M50 18A32 32 0 0 0 50 82Z" fill="#FF6A13"/></g><g transform="translate(3.5,3.5)"><path d="M50 18A32 32 0 0 1 50 82Z" fill="#12B76A"/></g></svg></div></div></div></div><div class="sm" style="font-size:13px;margin-top:12px">Tamanhos de avatar: 24, 36, 44, 64. A marca é um nome provisório (“racha”): troque o wordmark quando o nome final sair.</div></div></div>
+ <div class="col g16"><div class="demo"><div class="lbl">Cards de lista</div><div class="col g10" style="background:var(--bg);margin:-22px;padding:22px;border-radius:22px">
+ <div class="card" style="padding:14px 16px"><div class="row g12"><div class="tile t-or" style="width:46px;height:46px;font-size:23px">🍕</div><div class="grow"><div class="h3">Rolê de sexta</div><div class="sm" style="font-size:12px;margin-top:3px">Bar do Zé · sex, 2 out</div></div><div class="h3 tn">R$ 266,00</div></div>
+ <div class="row" style="justify-content:space-between;margin-top:12px"><div class="stack" style="display:flex"><div style="margin-left:0px"><div class="av" style="width:24px;height:24px;background:#FF6A13;color:#1B1511;font-size:10px;box-shadow:0 0 0 2px #fff;">A</div></div><div style="margin-left:-5px"><div class="av" style="width:24px;height:24px;background:#12B76A;color:#1B1511;font-size:10px;box-shadow:0 0 0 2px #fff;">B</div></div><div style="margin-left:-5px"><div class="av" style="width:24px;height:24px;background:#FFB224;color:#1B1511;font-size:10px;box-shadow:0 0 0 2px #fff;">C</div></div><div style="margin-left:-5px"><div class="av" style="width:24px;height:24px;background:#0B7A4B;color:#FFFFFF;font-size:10px;box-shadow:0 0 0 2px #fff;">D</div></div></div><span class="pill p-or">1 de 3 pagaram</span></div></div>
+ <div class="card row g12" style="padding:10px 14px"><div class="tile t-gr" style="width:40px;height:40px;font-size:20px">🍺</div><div class="grow"><div class="h3" style="font-size:15px">Chopp</div><div class="sm" style="font-size:12px">6 un.</div></div><div class="h3 tn" style="font-size:15px">R$ 66,00</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z"/></svg></div>
+ <div class="card row g12" style="padding:12px 14px;background:#F1FBF5"><div class="av" style="width:44px;height:44px;background:#12B76A;color:#1B1511;font-size:18px;">B</div><div class="grow"><div class="h3">Beto</div><div class="sm tn" style="font-size:13px">R$ 70,50</div></div><span class="pill p-gr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Pago</span></div>
+ <div class="card row g12" style="padding:12px 14px"><div class="av" style="width:44px;height:44px;background:#FFB224;color:#1B1511;font-size:18px;">C</div><div class="grow"><div class="h3">Cris</div><div class="sm tn" style="font-size:13px">R$ 62,50</div></div><div class="col" style="align-items:flex-end"><span class="pill p-or"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B93C00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pendente</span><span class="row g6" style="font-size:12px;font-weight:800;color:var(--green-d);margin-top:6px"><svg width="15" height="15" viewBox="0 0 32 32" fill="none" stroke="#0B7A4B" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="color:#0B7A4B;flex:none"><path d="M16 3.2C8.9 3.2 3.2 8.8 3.2 15.8c0 2.4.7 4.7 1.9 6.6L3.5 28.8l6.6-1.6c1.8 1 3.8 1.5 5.9 1.5 7.1 0 12.8-5.6 12.8-12.6S23.1 3.2 16 3.2z"/><path d="M11.6 9.8c.4-.4 1-.3 1.3.2l1 2c.2.4.1.8-.2 1.1l-.7.7c.9 1.7 2.2 3 3.9 3.9l.7-.7c.3-.3.7-.4 1.1-.2l2 1c.5.3.6.9.2 1.3-1 1.2-2.5 1.7-4.1 1.2-3.6-1.2-6.2-3.8-7.4-7.4-.4-1.5 0-3 1.2-4.1z" fill="currentColor" stroke="none"/></svg>Cobrar</span></div></div></div></div><div class="demo"><div class="lbl">Cartões de destaque</div><div class="col g12"><div style="padding:20px;border-radius:24px;background:linear-gradient(135deg,#FF8A3D,#FF5A00);box-shadow:0 14px 28px rgba(255,90,0,.28)">
+ <div style="font-size:13px;font-weight:700;color:var(--ink2)">A receber</div><div class="tn" style="font:800 40px/1.1 'Inter Display';letter-spacing:-.045em">R$ 295,00</div><div class="prog" style="margin-top:12px;background:rgba(27,21,17,.16)"><i style="width:36%"></i></div></div>
+ <div style="padding:20px;border-radius:24px;background:linear-gradient(135deg,#2BD58A,#0B9F5D);box-shadow:0 14px 28px rgba(11,122,75,.26);position:relative"><div style="font-size:13px;font-weight:700;color:var(--ink)">Recebido · tudo pago</div><div class="tn" style="font:800 40px/1.1 'Inter Display';letter-spacing:-.045em;color:var(--ink)">R$ 185,50</div>
+ <div style="position:absolute;right:18px;top:18px;width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div></div><div class="sm" style="font-size:13px;margin-top:12px">O cartão laranja vira verde quando a conta fecha. Texto sempre ink.</div></div></div></div>
+<div class="grid" style="grid-template-columns:1fr 1fr 1fr;align-items:start;margin-top:16px"><div class="demo"><div class="lbl">Barra de abas e botão central</div><div style="position:relative;height:120px;background:var(--bg);border-radius:18px;overflow:hidden;margin:-4px 0"><div class="tabbar" style="position:absolute;bottom:0;height:86px"><div class="tab on"><div class="ib"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div>Contas</div><div class="fab"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 5v14M5 12h14"/></svg></div><div class="tab"><div class="ib"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6F645B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.8 3.6-6 8-6s8 2.2 8 6"/></svg></div>Perfil</div></div></div><div class="sm" style="font-size:13px;margin-top:12px">Abas 3 colunas, botão central 58×58 raio 20 levantado 22px. Rótulo 12/700.</div></div><div class="demo"><div class="lbl">Toast, banner e aviso</div><div class="col g12"><div class="row g8" style="height:36px;padding:0 14px 0 8px;border-radius:18px;background:var(--green-d);color:#fff;font-size:14px;font-weight:800;width:max-content"><span style="width:22px;height:22px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Beto pagou R$ 70,50</div>
+ <div class="row g10" style="padding:10px 14px;border-radius:14px;background:var(--green-t);color:var(--green-d);font-size:13px;font-weight:800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="grow">Total confere com a nota</span><span class="tn">R$ 266,00</span></div>
+ <div class="row g10" style="padding:12px 14px;border-radius:14px;background:var(--orange-t);color:var(--orange-d);font-size:13px;font-weight:800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B93C00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Lembretes automáticos saem amanhã às 10h</div>
+ <div class="row g10" style="padding:12px 14px;border-radius:14px;background:var(--red-t);color:var(--red-d);font-size:13px;font-weight:800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M6 6l12 12M18 6L6 18"/></svg>Não deu pra ler a nota. Tente com mais luz.</div></div></div><div class="demo"><div class="lbl">Bottom sheet / seletor de método</div><div class="col g10"><div class="row g12" style="border:2px solid var(--green-d);background:#F5FCF8;border-radius:18px;padding:12px 14px"><div style="width:40px;height:40px;border-radius:12px;background:var(--green-t);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 3.5l8.5 8.5-8.5 8.5L3.5 12z"/><path d="M8.5 12h7M12 8.5v7"/></svg></div><div class="grow"><div class="h3" style="font-size:15px">Pix</div><div class="sm" style="font-size:12px">Cai na hora na conta da Ana</div></div><div style="width:22px;height:22px;border-radius:50%;background:var(--green-d);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div>
+ <div class="row g12" style="background:#fff;border-radius:18px;padding:12px 14px;box-shadow:var(--sh)"><div style="width:40px;height:40px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h3"/></svg></div><div class="grow"><div class="h3" style="font-size:15px">Cartão</div><div class="sm" style="font-size:12px">Crédito ou débito</div></div><div style="width:22px;height:22px;border-radius:50%;border:2px solid var(--line2)"></div></div></div><div class="sm" style="font-size:13px;margin-top:12px">Seleção = borda 2px verde profundo + check. Os métodos exibidos dependem do que o app realmente suporta.</div></div></div></div></body></html>

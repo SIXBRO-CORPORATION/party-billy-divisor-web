@@ -1,0 +1,142 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Racha</title><style>
+:root{
+--cream:#FFF4E6;--bg:#FAF6F1;--surface:#FFFFFF;--soft:#F4EEE7;--line:#EBE2D8;--line2:#E4D9CE;
+--ink:#1B1511;--ink2:#3A302A;--muted:#6F645B;--muted2:#8C8076;
+--orange:#FF6A13;--orange-600:#E5530A;--orange-d:#B93C00;--orange-t:#FFE6D3;--orange-l:#FF9A55;
+--green:#12B76A;--green-d:#0B7A4B;--green-t:#D8F5E5;--green-l:#34D399;
+--yellow:#FFB224;--yellow-t:#FFF1D0;--yellow-d:#8A5A00;
+--red:#D92D20;--red-t:#FEE4E2;--red-d:#B42318;
+--sh-sm:0 2px 8px rgba(80,40,0,.08);--sh:0 4px 14px rgba(80,40,0,.07);--sh-lg:0 14px 36px rgba(80,40,0,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:'Inter','Noto Color Emoji',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;font-size:15px;line-height:1.3}
+.disp{font-family:'Inter Display','Inter','Noto Color Emoji',sans-serif;letter-spacing:-.035em}
+.tn{font-variant-numeric:tabular-nums}
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Inter Display','Inter',sans-serif;font-weight:800;flex:none}
+.muted{color:var(--muted)}
+.row{display:flex;align-items:center}
+.col{display:flex;flex-direction:column}
+.g4{gap:4px}.g6{gap:6px}.g8{gap:8px}.g10{gap:10px}.g12{gap:12px}.g16{gap:16px}.g20{gap:20px}
+.grow{flex:1;min-width:0}
+.bold{font-weight:800}
+
+/* tipografia */
+.h-display{font:900 38px/1.04 'Inter Display';letter-spacing:-.04em;word-spacing:.06em}
+.h1{font:800 27px/1.1 'Inter Display';letter-spacing:-.035em;word-spacing:.04em}
+.h2{font:800 20px/1.15 'Inter Display';letter-spacing:-.03em;word-spacing:.03em}
+.h3{font:800 16px/1.2 'Inter Display';letter-spacing:-.02em}
+.body{font-size:15px;font-weight:500}
+.sm{font-size:13px;font-weight:600;color:var(--muted)}
+.cap{font-size:12px;font-weight:700;color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* superfícies */
+.card{background:#fff;border-radius:18px;box-shadow:var(--sh)}
+.card-xl{background:#fff;border-radius:24px;box-shadow:var(--sh)}
+.tile{border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.t-or{background:var(--orange-t)}.t-gr{background:var(--green-t)}.t-yl{background:var(--yellow-t)}.t-soft{background:var(--soft)}
+.rbtn{width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:var(--sh-sm);display:flex;align-items:center;justify-content:center;flex:none}
+
+/* botões */
+.btn{height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;font:800 16px/1 'Inter Display';letter-spacing:-.01em;border:0;white-space:nowrap}
+.btn.sm2{height:40px;border-radius:14px;font-size:14px;padding:0 16px}
+.btn.or{background:var(--orange);color:var(--ink);box-shadow:0 10px 22px rgba(255,106,19,.30)}
+.btn.gr{background:var(--green-d);color:#fff;box-shadow:0 10px 22px rgba(11,122,75,.26)}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.soft{background:var(--soft);color:var(--ink)}
+.btn.line{background:#fff;border:1.5px solid var(--line2);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* pílulas / chips */
+.pill{height:26px;padding:0 10px;border-radius:13px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:none}
+.p-or{background:var(--orange-t);color:var(--orange-d)}
+.p-gr{background:var(--green-t);color:var(--green-d)}
+.p-yl{background:var(--yellow-t);color:var(--yellow-d)}
+.p-rd{background:var(--red-t);color:var(--red-d)}
+.p-ink{background:var(--ink);color:#fff}
+.chip{height:34px;padding:0 14px;border-radius:17px;background:#fff;border:1.5px solid var(--line2);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex:none}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* campos */
+.fld>label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.inp{height:52px;border-radius:16px;background:#fff;border:1.5px solid var(--line2);display:flex;align-items:center;gap:10px;padding:0 16px;font-size:16px;font-weight:600;color:var(--ink)}
+.inp.focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,19,.18)}
+.inp .ph{color:var(--muted)}
+.inp svg{color:var(--muted)}
+.seg{display:flex;background:var(--soft);border-radius:16px;padding:4px;height:46px}
+.seg>div{flex:1;display:flex;align-items:center;justify-content:center;border-radius:12px;font:800 14px 'Inter Display';color:var(--muted)}
+.seg>div.on{background:#fff;color:var(--ink);box-shadow:var(--sh-sm)}
+.tog{width:46px;height:28px;border-radius:14px;background:#D9CFC4;position:relative;flex:none}
+.tog::after{content:'';position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.tog.on{background:var(--green-d)}.tog.on::after{left:21px}
+.prog{height:10px;border-radius:5px;background:rgba(27,21,17,.14);overflow:hidden}
+.prog>i{display:block;height:100%;border-radius:5px;background:var(--ink)}
+.steps{display:flex;gap:6px;flex:1}
+.steps i{height:6px;border-radius:3px;background:var(--line2);flex:1}
+.steps i.on{background:var(--orange)}
+
+/* mobile */
+.m{width:390px;height:844px;position:relative;overflow:hidden;background:var(--bg)}
+.sb{height:54px;padding:19px 30px 0;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:15px;position:relative;z-index:20}
+.sb .r{display:flex;gap:6px;align-items:center}
+.hi{position:absolute;bottom:8px;left:128px;width:134px;height:5px;border-radius:3px;background:var(--ink);z-index:30}
+.top{display:flex;align-items:center;gap:14px;padding:6px 20px 0}
+.cta{position:absolute;left:0;right:0;bottom:0;padding:34px 20px 30px;background:linear-gradient(180deg,rgba(250,246,241,0),var(--bg) 38%);z-index:10}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:86px;background:#fff;border-radius:26px 26px 0 0;box-shadow:0 -6px 24px rgba(80,40,0,.08);display:flex;justify-content:space-around;align-items:flex-start;padding:10px 24px 0;z-index:15}
+.tab{width:84px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:700;color:var(--muted)}
+.tab.on{color:var(--ink)}
+.tab .ib{width:52px;height:30px;border-radius:15px;display:flex;align-items:center;justify-content:center}
+.tab.on .ib{background:var(--orange-t)}
+.fab{width:58px;height:58px;border-radius:20px;background:var(--orange);display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 12px 24px rgba(255,106,19,.38)}
+
+.w{display:flex;width:1440px;min-height:900px;background:var(--bg)}
+.side{width:248px;flex:none;background:#fff;border-right:1.5px solid var(--line);padding:26px 16px 22px;display:flex;flex-direction:column;gap:6px}
+.nav{height:46px;border-radius:14px;display:flex;align-items:center;gap:12px;padding:0 14px;font-weight:700;font-size:15px;color:var(--muted)}
+.nav.on{background:var(--orange-t);color:var(--ink)}
+.main{flex:1;padding:32px 48px 48px;min-width:0}
+.wh{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.w1{font:800 32px/1.1 'Inter Display';letter-spacing:-.035em;word-spacing:.03em}
+.wcard{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:24px}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.crumbs b{color:var(--ink)}
+.stp{display:flex;align-items:center;gap:0;margin:26px 0 28px}
+.stp .s{display:flex;align-items:center;gap:10px;font:800 14px 'Inter Display';color:var(--muted)}
+.stp .n{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px 'Inter Display';background:var(--soft);color:var(--muted)}
+.stp .s.on{color:var(--ink)}.stp .s.on .n{background:var(--orange);color:var(--ink);box-shadow:0 0 0 5px rgba(255,106,19,.16)}
+.stp .s.done{color:var(--ink)}.stp .s.done .n{background:var(--green-d);color:#fff}
+.stp .ln{flex:1;height:2px;background:var(--line2);margin:0 14px;min-width:30px}
+.stp .ln.done{background:var(--green-d)}
+.th{display:grid;align-items:center;padding:0 16px;height:36px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tr{display:grid;align-items:center;padding:0 16px;min-height:72px;border-top:1.5px solid var(--line)}
+.dz{border:2.5px dashed #F5B58B;border-radius:22px;background:#FFF9F4}
+.hint{font-size:13px;font-weight:600;color:var(--muted)}
+.kpi{padding:20px 22px;border-radius:22px;background:#fff;box-shadow:var(--sh)}
+.kpi .k{font-size:13px;font-weight:700;color:var(--muted)}
+.kpi .v{font:800 34px/1.1 'Inter Display';letter-spacing:-.04em;margin-top:6px}
+.tg{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1.5px solid var(--line)}
+.tg:first-of-type{border-top:0}
+.ibox{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.chk{width:20px;height:20px;border-radius:6px;border:2px solid var(--line2);flex:none}
+.chk.on{background:var(--green-d);border-color:var(--green-d);display:flex;align-items:center;justify-content:center}
+.ta{min-height:150px;border-radius:16px;border:1.5px solid var(--line2);background:#fff;padding:14px 16px;font-size:15px;font-weight:500;line-height:1.5}
+</style></head><body style="width:1440px;"><div class="w"><div class="side">
+ <div style="padding:2px 6px 22px"><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="32" viewBox="0 0 100 100" style="flex:none"><g transform="translate(-3.5,-3.5)"><path d="M50 18A32 32 0 0 0 50 82Z" fill="#FF6A13"/></g><g transform="translate(3.5,3.5)"><path d="M50 18A32 32 0 0 1 50 82Z" fill="#12B76A"/></g></svg><span style="font:800 26px/1 'Inter Display';letter-spacing:-.045em;color:#1B1511">racha</span></div></div>
+ <div class="btn or" style="height:48px;margin-bottom:16px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 5v14M5 12h14"/></svg>Nova conta</div>
+ <div class="nav on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Contas</div><div class="nav "><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6F645B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.8 3.6-6 8-6s8 2.2 8 6"/></svg>Perfil e recebimento</div><div class="nav "><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6F645B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.8-2.5 2.2-2.5 3.9M12 17.3v.1"/></svg>Ajuda</div>
+ <div style="flex:1"></div>
+ <div class="row g10" style="padding:12px;border-radius:16px;background:var(--soft)"><div class="av" style="width:38px;height:38px;background:#FF6A13;color:#1B1511;font-size:16px;">A</div><div class="grow"><div class="h3" style="font-size:14px">Ana Souza</div><div class="cap" style="font-size:12px">ana@exemplo.com</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="#6F645B" style="flex:none"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+</div><div class="main"><div class="wh"><div><div class="crumbs">Contas <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M9 5l7 7-7 7"/></svg> Nova conta <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M9 5l7 7-7 7"/></svg> <b>Itens</b></div><div class="w1">Confira os itens</div><div class="sm" style="margin-top:6px;font-size:14px">Lemos 5 itens na nota. Corrija o que precisar antes de continuar.</div></div></div><div class="stp"><div class="s done"><div class="n"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Detalhes</div><div class="ln done"></div><div class="s on"><div class="n">2</div>Itens</div><div class="ln "></div><div class="s "><div class="n">3</div>Pessoas</div><div class="ln "></div><div class="s "><div class="n">4</div>Consumo</div><div class="ln "></div><div class="s "><div class="n">5</div>Resumo</div></div>
+<div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start"><div class="wcard" style="padding:22px 8px 8px"><div class="row" style="justify-content:space-between;padding:0 16px 14px"><div class="h2">Itens da nota</div><div class="btn soft sm2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 5v14M5 12h14"/></svg>Adicionar item</div></div>
+ <div class="th" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px"><span>Item</span><span>Qtd.</span><span>Valor unit.</span><span>Total</span><span></span></div><div class="tr" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px"><div class="row g12"><div class="tile t-or" style="width:42px;height:42px;font-size:21px">🍕</div><b style="font-size:15px">Pizza grande</b></div>
+<span class="tn" style="font-weight:700">1</span><span class="tn muted" style="font-weight:600">R$ 78,00</span><b class="tn">R$ 78,00</b><div class="row g12"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></svg></div></div><div class="tr" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px;background:#FFF8F1;border-top:1.5px solid var(--orange);border-bottom:1.5px solid var(--orange);margin:0 -8px;padding:0 24px;min-height:84px;box-shadow:0 0 0 4px rgba(255,106,19,.12)">
+<div class="row g12"><div class="tile t-gr" style="width:42px;height:42px;font-size:21px">🍺</div><div class="inp" style="height:44px;border-radius:12px;flex:1;margin-right:18px;font-size:15px"><b>Chopp</b></div></div>
+<div class="inp tn" style="height:44px;border-radius:12px;width:84px;font-size:15px;justify-content:center"><b>6</b></div><div class="inp tn" style="height:44px;border-radius:12px;width:120px;font-size:15px"><span class="muted">R$</span><b>11,00</b></div><b class="tn">R$ 66,00</b>
+<div class="row g8"><div style="width:34px;height:34px;border-radius:11px;background:var(--orange);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div></div><div class="tr" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px"><div class="row g12"><div class="tile t-or" style="width:42px;height:42px;font-size:21px">🍟</div><b style="font-size:15px">Porção de batata</b></div>
+<span class="tn" style="font-weight:700">1</span><span class="tn muted" style="font-weight:600">R$ 42,00</span><b class="tn">R$ 42,00</b><div class="row g12"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></svg></div></div><div class="tr" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px"><div class="row g12"><div class="tile t-gr" style="width:42px;height:42px;font-size:21px">🍹</div><b style="font-size:15px">Caipirinha</b></div>
+<span class="tn" style="font-weight:700">2</span><span class="tn muted" style="font-weight:600">R$ 22,00</span><b class="tn">R$ 44,00</b><div class="row g12"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></svg></div></div><div class="tr" style="grid-template-columns:2.4fr .8fr 1fr 1fr 70px"><div class="row g12"><div class="tile t-or" style="width:42px;height:42px;font-size:21px">🍰</div><b style="font-size:15px">Sobremesa</b></div>
+<span class="tn" style="font-weight:700">1</span><span class="tn muted" style="font-weight:600">R$ 36,00</span><b class="tn">R$ 36,00</b><div class="row g12"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8076" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></svg></div></div>
+ <div class="row" style="justify-content:space-between;padding:20px 16px 14px;border-top:1.5px solid var(--line)"><div class="row g10" style="color:var(--green-d);font-size:14px;font-weight:800"><div style="width:28px;height:28px;border-radius:50%;background:var(--green-t);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B7A4B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Total confere com a nota</div>
+ <div class="row g12"><span class="sm">Total dos itens</span><b class="tn" style="font:800 28px 'Inter Display';letter-spacing:-.04em;color:var(--orange-600)">R$ 266,00</b></div></div></div><div class="wcard" style="background:#2a211b;box-shadow:var(--sh-lg);padding:26px 0 26px;display:flex;flex-direction:column;align-items:center;border-radius:24px">
+ <div class="eyebrow" style="color:#d8cbbd;align-self:flex-start;padding-left:24px;margin-bottom:16px">Nota original</div>
+ <div style="filter:drop-shadow(0 20px 26px rgba(0,0,0,.45))"><div style="width:260px;background:#FFFDF8;clip-path:polygon(0.0px 0px,12.4px 5px,24.8px 0px,37.1px 5px,49.5px 0px,61.9px 5px,74.3px 0px,86.7px 5px,99.0px 0px,111.4px 5px,123.8px 0px,136.2px 5px,148.6px 0px,161.0px 5px,173.3px 0px,185.7px 5px,198.1px 0px,210.5px 5px,222.9px 0px,235.2px 5px,247.6px 0px,260.0px 5px,260.0px calc(100% - 5px),247.6px calc(100% - 0px),235.2px calc(100% - 5px),222.9px calc(100% - 0px),210.5px calc(100% - 5px),198.1px calc(100% - 0px),185.7px calc(100% - 5px),173.3px calc(100% - 0px),161.0px calc(100% - 5px),148.6px calc(100% - 0px),136.2px calc(100% - 5px),123.8px calc(100% - 0px),111.4px calc(100% - 5px),99.0px calc(100% - 0px),86.7px calc(100% - 5px),74.3px calc(100% - 0px),61.9px calc(100% - 5px),49.5px calc(100% - 0px),37.1px calc(100% - 5px),24.8px calc(100% - 0px),12.4px calc(100% - 5px),0.0px calc(100% - 0px));padding:23px 0 27px"><div style="text-align:center"><div style="font:900 18px 'Inter Display';letter-spacing:.14em">BAR DO ZÉ</div><div style="font-size:10.0px;color:#6F645B;font-weight:600;margin-top:4px">Rua das Flores, 120 · Centro</div></div><div style="border-top:1.5px dashed #D9CFC4;margin:13px 15px 6px"></div><div style="display:flex;justify-content:space-between;padding:0 15px;height:28px;align-items:center;font-size:12.6px;font-weight:600;color:#3A302A;border-radius:6px;margin:0 5px;"><span>1x Pizza grande</span><b style="font-weight:800">78,00</b></div><div style="display:flex;justify-content:space-between;padding:0 15px;height:28px;align-items:center;font-size:12.6px;font-weight:600;color:#3A302A;border-radius:6px;margin:0 5px;background:rgba(18,183,106,.2);box-shadow:inset 3px 0 0 #12B76A;"><span>6x Chopp</span><b style="font-weight:800">66,00</b></div><div style="display:flex;justify-content:space-between;padding:0 15px;height:28px;align-items:center;font-size:12.6px;font-weight:600;color:#3A302A;border-radius:6px;margin:0 5px;"><span>1x Porção batata</span><b style="font-weight:800">42,00</b></div><div style="display:flex;justify-content:space-between;padding:0 15px;height:28px;align-items:center;font-size:12.6px;font-weight:600;color:#3A302A;border-radius:6px;margin:0 5px;"><span>2x Caipirinha</span><b style="font-weight:800">44,00</b></div><div style="display:flex;justify-content:space-between;padding:0 15px;height:28px;align-items:center;font-size:12.6px;font-weight:600;color:#3A302A;border-radius:6px;margin:0 5px;"><span>1x Sobremesa</span><b style="font-weight:800">36,00</b></div><div style="border-top:1.5px dashed #D9CFC4;margin:6px 15px 8px"></div><div style="display:flex;justify-content:space-between;align-items:center;padding:2px 15px 0"><span style="font-size:13px;font-weight:800">TOTAL</span><span style="font:900 21px 'Inter Display'">266,00</span></div><div style="margin:12px 14px 0;height:34px;background:repeating-linear-gradient(90deg,#1B1511 0 1.5px,transparent 1.5px 3.5px,#1B1511 3.5px 6px,transparent 6px 7px,#1B1511 7px 8px,transparent 8px 11px)"></div></div></div></div></div><div class="row" style="justify-content:space-between;margin-top:28px"><div class="btn line" style="width:140px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M15 5l-7 7 7 7"/></svg>Voltar</div><div class="row g12"><div class="btn or" style="width:200px">Continuar<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B1511" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div></div></div></div></body></html>

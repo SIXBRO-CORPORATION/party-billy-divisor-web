@@ -1,0 +1,23 @@
+/* Tokens de design (web). Equivalentes a tokens.ts. */
+:root {
+  --cream: #FFF4E6; --bg: #FAF6F1; --surface: #FFFFFF; --soft: #F4EEE7; --line: #EBE2D8; --line2: #E4D9CE;
+  --ink: #1B1511; --ink2: #3A302A; --muted: #6F645B; --muted2: #8C8076;
+
+  --orange: #FF6A13; --orange-600: #E5530A; --orange-d: #B93C00; --orange-t: #FFE6D3; --orange-l: #FF9A55;
+  --green: #12B76A; --green-d: #0B7A4B; --green-t: #D8F5E5; --green-l: #34D399;
+  --yellow: #FFB224; --yellow-t: #FFF1D0; --yellow-d: #8A5A00;
+  --red: #D92D20; --red-t: #FEE4E2; --red-d: #B42318;
+
+  --sh-sm: 0 2px 8px rgba(80,40,0,.08);
+  --sh: 0 4px 14px rgba(80,40,0,.07);
+  --sh-lg: 0 14px 36px rgba(80,40,0,.13);
+
+  --r-sm: 12px; --r-md: 16px; --r-lg: 18px; --r-xl: 24px;
+
+  --font-body: 'Inter', 'Noto Color Emoji', sans-serif;
+  --font-display: 'Inter Display', 'Inter', 'Noto Color Emoji', sans-serif;
+}
+
+body { font-family: var(--font-body); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+.tn { font-variant-numeric: tabular-nums; }          /* use em todo valor em reais */
+.disp { font-family: var(--font-display); letter-spacing: -.035em; }
