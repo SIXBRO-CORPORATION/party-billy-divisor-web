@@ -99,6 +99,20 @@ export function useBillDraft() {
         []
     );
 
+    const updateProduct = useCallback(
+        (productId: number, changes: { name: string; unitPrice: number; quantity: number }) => {
+            setDraft((current) => ({
+                ...current,
+                products: current.products.map((product) =>
+                    product.id === productId
+                        ? { ...product, ...changes, name: changes.name.trim() }
+                        : product
+                ),
+            }));
+        },
+        []
+    );
+
     const removeProduct = useCallback((productId: number) => {
         setDraft((current) => ({
             ...current,
@@ -132,6 +146,7 @@ export function useBillDraft() {
         removePerson,
         addProduct,
         addProducts,
+        updateProduct,
         removeProduct,
         setProductParticipants,
         reset,

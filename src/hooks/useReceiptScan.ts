@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { billService } from '../services/bill.service.ts';
 import { isRetryableError } from '../utils/http-client.ts';
 import { useToast } from './useToast.ts';
@@ -12,6 +12,13 @@ export function useReceiptScan(onScanned: (items: ScannedProduct[]) => void) {
     const toast = useToast();
     const [isScanning, setIsScanning] = useState(false);
 
+    const latestRequest = useRef(0);
+
+    function cancel() {
+        latestRequest.current += 1;
+        setIsScanning(false);
+    }
+
     async function scan(file: File): Promise<void> {
         if (!file.type.startsWith('image/')) {
             toast.error('Envie uma imagem (foto ou print da nota fiscal)');
@@ -23,11 +30,21 @@ export function useReceiptScan(onScanned: (items: ScannedProduct[]) => void) {
             return;
         }
 
+        const requestId = ++latestRequest.current;
+
         setIsScanning(true);
 
         try {
-            onScanned(await billService.scanReceipt(file));
+            const items = await billService.scanReceipt(file);
+
+            if (requestId === latestRequest.current) {
+                onScanned(items);
+            }
         } catch (error) {
+            if (requestId !== latestRequest.current) {
+                return;
+            }
+
             const message =
                 error instanceof Error ? error.message : 'Não foi possível ler a nota fiscal';
 
@@ -42,9 +59,11 @@ export function useReceiptScan(onScanned: (items: ScannedProduct[]) => void) {
                 toast.error(message);
             }
         } finally {
-            setIsScanning(false);
+            if (requestId === latestRequest.current) {
+                setIsScanning(false);
+            }
         }
     }
 
-    return { isScanning, scan };
+    return { isScanning, scan, cancel };
 }

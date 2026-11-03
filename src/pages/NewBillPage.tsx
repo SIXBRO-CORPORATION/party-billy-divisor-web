@@ -1,14 +1,14 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BillDetailsStep from '../components/bill/BillDetailsStep.tsx';
-import BillStepper from '../components/bill/BillStepper.tsx';
+import BillItemsStep from '../components/bill/BillItemsStep.tsx';
 import type { ItemsMethod } from '../components/bill/ItemsMethodPicker.tsx';
+import NewBillHeader from '../components/bill/NewBillHeader.tsx';
 import PersonForm from '../components/bill/PersonForm.tsx';
 import PersonCard from '../components/bill/PersonCard.tsx';
 import ProductCard from '../components/bill/ProductCard.tsx';
-import ProductForm from '../components/bill/ProductForm.tsx';
-import ReceiptScanButton from '../components/bill/ReceiptScanButton.tsx';
+import ReceiptScanStep from '../components/bill/ReceiptScanStep.tsx';
 import { ShareButton } from '../components/bill/ShareButton.tsx';
 import SplitPreview from '../components/bill/SplitPreview.tsx';
 import { Button } from '../components/ui/Button.tsx';
@@ -27,9 +27,13 @@ import {
     getBillPayer,
     todayISODate,
 } from '../utils/utils.ts';
-import { ChevronRightIcon } from '../components/ui/icons.tsx';
 
-type Step = 'details' | 'items';
+type Step = 'details' | 'scan' | 'items' | 'people';
+
+interface ReceiptPhoto {
+    url: string;
+    name: string;
+}
 
 export default function NewBillPage() {
     const {
@@ -42,6 +46,7 @@ export default function NewBillPage() {
         removePerson,
         addProduct,
         addProducts,
+        updateProduct,
         removeProduct,
         setProductParticipants,
         reset,
@@ -52,9 +57,9 @@ export default function NewBillPage() {
     const toast = useToast();
     const { user } = useAuth();
 
-    // Passo 1 ("Detalhes") do design; o passo "items" concentra, por enquanto, o que o
-    // design separa em Itens, Pessoas, Consumo e Resumo (passos 2 a 5, ainda não redesenhados).
     const [step, setStep] = useState<Step>('details');
+    const [receipt, setReceipt] = useState<ReceiptPhoto | null>(null);
+    const [scannedCount, setScannedCount] = useState<number | null>(null);
     const [method, setMethod] = useState<ItemsMethod>(() =>
         draft.products.length > 0 ? 'manual' : 'scan'
     );
@@ -64,7 +69,15 @@ export default function NewBillPage() {
     const titleInputRef = useRef<HTMLInputElement>(null);
     const scanInputRef = useRef<HTMLInputElement>(null);
 
-    const { isScanning, scan } = useReceiptScan((scanned) => {
+    useEffect(() => {
+        return () => {
+            if (receipt) {
+                URL.revokeObjectURL(receipt.url);
+            }
+        };
+    }, [receipt]);
+
+    const { isScanning, scan, cancel: cancelScan } = useReceiptScan((scanned) => {
         if (scanned.length === 0) {
             toast.error('Não consegui identificar itens nessa nota. Tente outra foto.');
             return;
@@ -78,7 +91,7 @@ export default function NewBillPage() {
             }))
         );
 
-        toast.success(`${scanned.length} item(ns) lido(s) da nota. Confira e vincule quem consumiu.`);
+        setScannedCount(scanned.length);
         setStep('items');
     });
 
@@ -112,6 +125,7 @@ export default function NewBillPage() {
             return;
         }
 
+        setScannedCount(null);
         setStep('items');
     }
 
@@ -120,9 +134,33 @@ export default function NewBillPage() {
 
         event.target.value = '';
 
-        if (file) {
-            void scan(file);
+        if (!file) {
+            return;
         }
+
+        setReceipt({ url: URL.createObjectURL(file), name: file.name });
+        setStep('scan');
+        void scan(file);
+    }
+
+    function handleScanManually() {
+        cancelScan();
+        setScannedCount(null);
+        setStep('items');
+    }
+
+    function handleBackToDetails() {
+        if (draft.products.length > 0) {
+            setMethod('manual');
+        }
+
+        setStep('details');
+    }
+
+    function handleReset() {
+        reset();
+        setReceipt(null);
+        setScannedCount(null);
     }
 
     async function handleSave() {
@@ -141,19 +179,14 @@ export default function NewBillPage() {
         }
     }
 
-    if (step === 'details') {
+    if (step !== 'people') {
+        const itemsSubtitle =
+            scannedCount === null
+                ? 'Adicione, edite ou remova itens antes de continuar.'
+                : `Lemos ${scannedCount} ${scannedCount === 1 ? 'item' : 'itens'} na nota. Corrija o que precisar antes de continuar.`;
+
         return (
             <div className="newbill">
-                <nav className="newbill-crumbs" aria-label="Você está em">
-                    <Link to="/">Contas</Link>
-                    <ChevronRightIcon size={14} strokeWidth={2.6} />
-                    <strong>Nova conta</strong>
-                </nav>
-
-                <h1 className="newbill-title">Nova conta</h1>
-
-                <BillStepper current={1} />
-
                 <input
                     ref={scanInputRef}
                     type="file"
@@ -164,26 +197,67 @@ export default function NewBillPage() {
                     tabIndex={-1}
                 />
 
-                <BillDetailsStep
-                    draft={draft}
-                    date={date}
-                    userName={userName}
-                    method={method}
-                    isBusy={isScanning}
-                    titleError={
-                        showTitleError && draft.title.trim().length === 0
-                            ? 'Dê um nome para a conta'
-                            : undefined
-                    }
-                    titleInputRef={titleInputRef}
-                    onTitleChange={handleTitleChange}
-                    onPlaceChange={setPlace}
-                    onDateChange={setDate}
-                    onPayerChange={setPayerId}
-                    onMethodChange={setMethod}
-                    onCancel={() => navigate('/')}
-                    onContinue={handleContinue}
-                />
+                {step === 'details' && (
+                    <>
+                        <NewBillHeader current={1} title="Nova conta" />
+
+                        <BillDetailsStep
+                            draft={draft}
+                            date={date}
+                            userName={userName}
+                            method={method}
+                            isBusy={isScanning}
+                            titleError={
+                                showTitleError && draft.title.trim().length === 0
+                                    ? 'Dê um nome para a conta'
+                                    : undefined
+                            }
+                            titleInputRef={titleInputRef}
+                            onTitleChange={handleTitleChange}
+                            onPlaceChange={setPlace}
+                            onDateChange={setDate}
+                            onPayerChange={setPayerId}
+                            onMethodChange={setMethod}
+                            onCancel={() => navigate('/')}
+                            onContinue={handleContinue}
+                        />
+                    </>
+                )}
+
+                {step === 'scan' && receipt && (
+                    <>
+                        <NewBillHeader current={2} title="Escanear nota" trail="Itens" />
+
+                        <ReceiptScanStep
+                            imageUrl={receipt.url}
+                            fileName={receipt.name}
+                            status={isScanning ? 'reading' : 'failed'}
+                            onPickAnother={() => scanInputRef.current?.click()}
+                            onManual={handleScanManually}
+                        />
+                    </>
+                )}
+
+                {step === 'items' && (
+                    <>
+                        <NewBillHeader
+                            current={2}
+                            title="Confira os itens"
+                            subtitle={itemsSubtitle}
+                            trail="Itens"
+                        />
+
+                        <BillItemsStep
+                            products={draft.products}
+                            receiptUrl={receipt?.url ?? null}
+                            onAddProduct={addProduct}
+                            onUpdateProduct={updateProduct}
+                            onRemoveProduct={removeProduct}
+                            onBack={handleBackToDetails}
+                            onContinue={() => setStep('people')}
+                        />
+                    </>
+                )}
             </div>
         );
     }
@@ -204,7 +278,7 @@ export default function NewBillPage() {
                 </div>
 
                 <div className="page-header-actions hide-on-mobile">
-                    <Button variant="ghost" onClick={reset} disabled={isCreating}>
+                    <Button variant="ghost" onClick={handleReset} disabled={isCreating}>
                         Limpar
                     </Button>
 
@@ -220,9 +294,15 @@ export default function NewBillPage() {
                     <span>{summary}</span>
                 </div>
 
-                <Button variant="outline" size="sm" onClick={() => setStep('details')}>
-                    Editar detalhes
-                </Button>
+                <div className="bill-summary-actions">
+                    <Button variant="outline" size="sm" onClick={() => setStep('details')}>
+                        Editar detalhes
+                    </Button>
+
+                    <Button variant="outline" size="sm" onClick={() => setStep('items')}>
+                        Editar itens
+                    </Button>
+                </div>
             </section>
 
             <section className="panel">
@@ -231,16 +311,12 @@ export default function NewBillPage() {
                         <span className="step-badge">1</span>
                         <span>Itens da conta</span>
                     </div>
-
-                    <ReceiptScanButton onConfirm={addProducts} />
                 </div>
-
-                <ProductForm onAddProduct={addProduct} />
 
                 <div className="card-list">
                     {draft.products.length === 0 && (
                         <p className="panel-empty">
-                            Nenhum item ainda. Fotografe a nota ou adicione um item acima.
+                            Nenhum item ainda. Use “Editar itens” para adicionar.
                         </p>
                     )}
 
@@ -317,7 +393,7 @@ export default function NewBillPage() {
                 </div>
 
                 <div className="save-bar-actions">
-                    <Button variant="ghost" onClick={reset} disabled={isCreating} size="sm">
+                    <Button variant="ghost" onClick={handleReset} disabled={isCreating} size="sm">
                         Limpar
                     </Button>
 

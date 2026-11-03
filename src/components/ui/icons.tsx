@@ -297,3 +297,37 @@ export function AppleLogo({ size = 20 }: { size?: number }) {
         </svg>
     );
 }
+
+export function ImageIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <rect x="3.5" y="4.5" width="17" height="15" rx="3" />
+            <circle cx="9" cy="10" r="1.8" />
+            <path d="M4 17l5-4.5 4 3.5 3-2.5 4.5 3.5" />
+        </svg>
+    );
+}
+
+export function DownloadIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M12 4v11M8 11l4 4 4-4M5 20h14" />
+        </svg>
+    );
+}
+
+export function TrashIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13" />
+        </svg>
+    );
+}
+
+export function CloseIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+    );
+}
