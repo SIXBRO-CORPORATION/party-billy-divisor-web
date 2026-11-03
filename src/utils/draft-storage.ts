@@ -4,6 +4,9 @@ const DRAFT_KEY = 'billy:draft';
 
 export const emptyDraft: BillDraft = {
     title: '',
+    place: '',
+    date: '',
+    payerId: null,
     persons: [],
     products: [],
     relations: [],
@@ -21,6 +24,9 @@ export function loadDraft(): BillDraft {
 
         return {
             title: parsed.title ?? '',
+            place: parsed.place ?? '',
+            date: parsed.date ?? '',
+            payerId: parsed.payerId ?? null,
             persons: parsed.persons ?? [],
             products: parsed.products ?? [],
             relations: parsed.relations ?? [],

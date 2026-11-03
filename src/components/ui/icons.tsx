@@ -223,6 +223,73 @@ export function ChevronRightIcon(props: IconProps) {
     );
 }
 
+export function MapPinIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M12 21s7-6 7-11.2a7 7 0 0 0-14 0C5 15 12 21 12 21z" />
+            <circle cx="12" cy="9.8" r="2.4" />
+        </svg>
+    );
+}
+
+export function CalendarIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <rect x="3.5" y="5" width="17" height="15" rx="3" />
+            <path d="M3.5 10h17M8 3v4M16 3v4" />
+        </svg>
+    );
+}
+
+export function ChevronDownIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M5 9l7 7 7-7" />
+        </svg>
+    );
+}
+
+export function ChevronLeftIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M15 5l-7 7 7 7" />
+        </svg>
+    );
+}
+
+export function ArrowRightIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+    );
+}
+
+export function CameraIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6H8l1.4-2h5.2L16 6h1.5A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" />
+            <circle cx="12" cy="12.5" r="3.6" />
+        </svg>
+    );
+}
+
+export function PencilIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M4 20l1-4.2L16 4.8l3.2 3.2L8.2 19z" />
+        </svg>
+    );
+}
+
+export function SparklesIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps(props)}>
+            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+        </svg>
+    );
+}
+
 export function AppleLogo({ size = 20 }: { size?: number }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="#1B1511" aria-hidden="true">

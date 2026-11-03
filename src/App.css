@@ -2127,3 +2127,522 @@
         flex-direction: column;
     }
 }
+
+/* ---------- nova conta: passo "Detalhes" ---------- */
+/* Baseado em docs/system-design/html/w03-nova-conta.html */
+
+.newbill {
+    display: flex;
+    flex-direction: column;
+}
+
+.newbill-crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.newbill-crumbs a {
+    color: var(--muted);
+}
+
+.newbill-crumbs svg {
+    color: var(--muted2);
+}
+
+.newbill-crumbs strong {
+    color: var(--ink);
+}
+
+.newbill-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+}
+
+/* stepper (desktop) */
+
+.stepper {
+    display: flex;
+    align-items: center;
+    margin: 26px 0 28px;
+    padding: 0;
+    list-style: none;
+}
+
+.stepper-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.stepper-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--soft);
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.stepper-step.is-current,
+.stepper-step.is-done {
+    color: var(--ink);
+}
+
+.stepper-step.is-current .stepper-number {
+    background: var(--orange);
+    color: var(--ink);
+    box-shadow: 0 0 0 5px rgba(255, 106, 19, 0.16);
+}
+
+.stepper-step.is-done .stepper-number {
+    background: var(--green-d);
+    color: #fff;
+}
+
+.stepper-line {
+    flex: 1;
+    height: 2px;
+    min-width: 30px;
+    margin: 0 14px;
+    background: var(--line2);
+}
+
+.stepper-line.is-done {
+    background: var(--green-d);
+}
+
+.stepper-compact {
+    display: none;
+}
+
+/* layout */
+
+.newbill-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 24px;
+    align-items: start;
+}
+
+.newbill-card {
+    padding: 28px;
+    background: var(--surface);
+    border-radius: 22px;
+    box-shadow: var(--sh);
+}
+
+.newbill-h2 {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+}
+
+.newbill-h2-spaced {
+    margin: 32px 0 16px;
+}
+
+.newbill-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.newbill-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px 200px;
+    gap: 16px;
+}
+
+/* campos com controle nativo transparente por cima (data, seleção) */
+
+.field-shell-overlay {
+    position: relative;
+}
+
+.field-value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.field-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* escolha do método de entrada dos itens */
+
+.method-grid {
+    display: flex;
+    gap: 16px;
+}
+
+.method-card {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2.5px solid var(--line);
+    border-radius: 20px;
+    background: var(--surface);
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.method-card:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.method-card:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+}
+
+.method-card.is-selected {
+    border-color: var(--orange);
+    background: #fff8f1;
+}
+
+.method-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.method-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 17px;
+    color: var(--ink);
+}
+
+.method-tile.is-orange {
+    background: var(--orange-t);
+}
+
+.method-tile.is-green {
+    background: var(--green-t);
+}
+
+.method-radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--line2);
+    border-radius: 50%;
+    color: var(--ink);
+}
+
+.method-card.is-selected .method-radio {
+    background: var(--orange);
+    border-color: var(--orange);
+}
+
+.method-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.method-title {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.method-desc {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+/* coluna lateral: prévia + dica */
+
+.newbill-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bill-preview {
+    padding: 24px;
+    background: var(--cream);
+    border: 1.5px solid #f7dfc3;
+    border-radius: 22px;
+}
+
+.bill-preview-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.bill-preview-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.bill-preview-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
+    background: var(--orange-t);
+    font-size: 26px;
+}
+
+.bill-preview-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bill-preview-text strong {
+    overflow-wrap: anywhere;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.bill-preview-text strong.is-empty {
+    color: var(--muted);
+}
+
+.bill-preview-text span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.bill-preview-payer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.bill-preview-payer strong {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.bill-preview-hint {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1.5px dashed #f0cfa8;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.newbill-tip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: var(--green-t);
+    color: var(--green-d);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.newbill-tip svg {
+    flex: none;
+}
+
+/* rodapé de ações */
+
+.newbill-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.newbill-cancel {
+    width: 140px;
+}
+
+.newbill-continue {
+    width: 200px;
+}
+
+/* resumo dos detalhes no passo seguinte */
+
+.bill-summary {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bill-summary-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.bill-summary-info strong {
+    overflow-wrap: anywhere;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.bill-summary-info span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+@media (max-width: 1280px) {
+    .newbill-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .newbill-row-place {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 1180px) {
+    .newbill-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .newbill-title {
+        font-size: 26px;
+    }
+
+    .stepper {
+        display: none;
+    }
+
+    .stepper-compact {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 16px 0 20px;
+    }
+
+    .stepper-compact-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--muted);
+    }
+
+    .stepper-compact-label strong {
+        color: var(--ink);
+    }
+
+    .stepper-compact-bars {
+        display: flex;
+        gap: 6px;
+    }
+
+    .stepper-compact-bars i {
+        flex: 1;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--line2);
+    }
+
+    .stepper-compact-bars i.is-on {
+        background: var(--orange);
+    }
+
+    .newbill-card {
+        padding: 20px;
+    }
+
+    /* o que a prévia mostra já está nos campos logo acima */
+    .bill-preview {
+        display: none;
+    }
+
+    .method-grid {
+        flex-direction: column;
+    }
+
+    .newbill-footer {
+        margin-top: 20px;
+    }
+
+    .newbill-cancel {
+        width: auto;
+    }
+
+    .newbill-continue {
+        flex: 1;
+        width: auto;
+    }
+
+    .bill-summary {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

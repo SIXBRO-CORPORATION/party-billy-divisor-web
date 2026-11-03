@@ -20,6 +20,18 @@ export function useBillDraft() {
         setDraft((current) => ({ ...current, title }));
     }, []);
 
+    const setPlace = useCallback((place: string) => {
+        setDraft((current) => ({ ...current, place }));
+    }, []);
+
+    const setDate = useCallback((date: string) => {
+        setDraft((current) => ({ ...current, date }));
+    }, []);
+
+    const setPayerId = useCallback((payerId: number | null) => {
+        setDraft((current) => ({ ...current, payerId }));
+    }, []);
+
     const addPerson = useCallback((name: string) => {
         const trimmed = name.trim();
 
@@ -47,6 +59,7 @@ export function useBillDraft() {
         setDraft((current) => ({
             ...current,
             persons: current.persons.filter((person) => person.id !== personId),
+            payerId: current.payerId === personId ? null : current.payerId,
             relations: current.relations.filter((relation) => relation.personId !== personId),
         }));
     }, []);
@@ -112,6 +125,9 @@ export function useBillDraft() {
     return {
         draft,
         setTitle,
+        setPlace,
+        setDate,
+        setPayerId,
         addPerson,
         removePerson,
         addProduct,

@@ -1,6 +1,7 @@
 import type { BillDraft } from "../types/draft.ts";
 import type { PersonSplit, PersonSplitItem, SplitResult } from "../types/split.ts";
 import type { CreateBillRequest } from "../types/bill.ts";
+import type { BillPayer } from "../components/bill/BillPreviewCard.tsx";
 
 export function parseMoneyInput(value: string): number {
     const normalized = value.replace(",", ".").replace(/[^0-9.]/g, "");
@@ -13,7 +14,6 @@ export function formatMoney(value: number): string {
     return value.toFixed(2).replace(".", ",");
 }
 
-/** A API devolve valores monetários como string decimal ("42.50"). */
 export function formatAmount(value: string | number): string {
     const parsed = typeof value === "number" ? value : Number(value);
 
@@ -38,7 +38,6 @@ export function formatDate(value?: string | null): string {
     });
 }
 
-/** Ex.: "sex, 2 out" — usado nas linhas de conta da página inicial. */
 export function formatShortDate(value?: string | null): string {
     if (!value) {
         return "";
@@ -57,6 +56,40 @@ export function formatShortDate(value?: string | null): string {
     });
 }
 
+const WEEKDAYS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+const MONTHS = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+export function todayISODate(): string {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    return `${now.getFullYear()}-${month}-${day}`;
+}
+
+export function formatDayLabel(isoDate: string): string {
+    const [year, month, day] = isoDate.split("-").map(Number);
+    const parsed = new Date(year, month - 1, day);
+
+    if (!year || !month || !day || parsed.getMonth() !== month - 1) {
+        return "";
+    }
+
+    return `${WEEKDAYS[parsed.getDay()]}, ${day} ${MONTHS[month - 1]}`;
+}
+
+export function getBillPayer(draft: BillDraft, userName: string): BillPayer {
+    const personIndex = draft.persons.findIndex((person) => person.id === draft.payerId);
+
+    if (personIndex === -1) {
+        return { name: "Você", avatarLabel: userName, avatarIndex: 0 };
+    }
+
+    const name = draft.persons[personIndex].name;
+
+    return { name, avatarLabel: name, avatarIndex: personIndex + 1 };
+}
+
 export function capitalize(value: string): string {
     return value.length > 0 ? value.charAt(0).toUpperCase() + value.slice(1) : value;
 }
@@ -69,11 +102,6 @@ export function getNextId(items: { id: number }[]): number {
     return items.reduce((maxId, item) => Math.max(maxId, item.id), 0) + 1;
 }
 
-/**
- * Divide um total em N partes iguais em centavos, jogando o resto na
- * primeira parte — mesma regra do BillSplitCalculator do backend, para
- * que a prévia local seja igual ao que a API vai calcular.
- */
 export function splitEvenly(total: number, participantsCount: number): number[] {
     if (participantsCount <= 0) {
         return [];
@@ -147,7 +175,6 @@ export function calculateBillSplit(draft: BillDraft): SplitResult {
     };
 }
 
-/** Converte o rascunho local no payload de POST /bills. */
 export function draftToCreateBillRequest(draft: BillDraft): CreateBillRequest {
     return {
         title: draft.title.trim(),

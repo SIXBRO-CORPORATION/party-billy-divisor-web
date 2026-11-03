@@ -60,10 +60,13 @@ src/
 1. **Login/registro** (`/login`, `/register`) — `POST /auth/register` seguido de
    `POST /auth/login`; o token vai para o cookie e `GET /auth/me` valida a
    sessão nos próximos acessos.
-2. **Nova conta** (`/bills/new`) — o rascunho (pessoas, itens, vínculos) fica no
-   `localStorage` e mostra uma prévia da divisão calculada com a mesma regra do
-   backend (sobra de centavos para o primeiro participante). Ao salvar, vira um
-   `POST /bills` com `participant_names` por item.
+2. **Nova conta** (`/bills/new`) — começa pelo passo **Detalhes** (nome, local, data,
+   quem pagou e como adicionar os itens: ler a nota ou digitar), conforme
+   `docs/system-design/html/w03-nova-conta.html`. Em seguida vêm itens, pessoas e
+   vínculos. O rascunho fica no `localStorage` e mostra uma prévia da divisão
+   calculada com a mesma regra do backend (sobra de centavos para o primeiro
+   participante). Ao salvar, vira um `POST /bills` com `participant_names` por
+   item. Local, data e quem pagou ainda não existem na API: ficam só no rascunho.
 3. **Minhas contas** (`/`) — `GET /bills`, com progresso de pagamento por conta.
 4. **Detalhe** (`/bills/:billId`) — `GET /bills/{id}` e
    `PATCH /bills/{id}/participants/{id}/payment` para marcar quem já pagou.
