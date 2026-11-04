@@ -2652,7 +2652,8 @@
 /* ícone + texto nos botões do fluxo (o .btn-content não tem layout próprio) */
 .newbill-footer .btn-content,
 .items-card-head .btn-content,
-.scan-actions .btn-content {
+.scan-actions .btn-content,
+.people-form .btn-content {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -2976,6 +2977,261 @@
     max-height: 560px;
     border-radius: 6px;
     box-shadow: 0 20px 26px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- passo 3: pessoas (w06 pessoas) ---------- */
+
+.people-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.people-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+}
+
+.people-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.people-form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.people-form-submit {
+    flex: none;
+    width: 160px;
+}
+
+.people-average {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.person-head,
+.person-row {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr) 84px;
+    align-items: center;
+    column-gap: 12px;
+    padding: 0 16px;
+}
+
+.person-head {
+    height: 36px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.person-row {
+    min-height: 72px;
+    border-top: 1.5px solid var(--line);
+}
+
+.person-row.is-editing {
+    position: relative;
+    min-height: 84px;
+    margin: 0 -8px;
+    padding: 0 24px;
+    background: #fff8f1;
+    border-top-color: var(--orange);
+    border-bottom: 1.5px solid var(--orange);
+    box-shadow: 0 0 0 4px rgba(255, 106, 19, 0.12);
+}
+
+.person-cell-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.person-name {
+    overflow-wrap: anywhere;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.person-payer-pill {
+    flex: none;
+}
+
+.person-cell-phone {
+    min-width: 0;
+}
+
+.person-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink2);
+}
+
+.person-phone svg {
+    flex: none;
+    color: var(--green-d);
+}
+
+.person-phone-empty {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted2);
+}
+
+.person-cell-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+/* coluna lateral: sugestões de pessoas (w06) */
+
+.people-suggestions {
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 22px;
+    box-shadow: var(--sh);
+}
+
+.people-suggestions-subtitle {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.people-suggestions-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.people-suggestions-empty {
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.people-suggestion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1.5px solid var(--line);
+}
+
+.people-suggestion:first-child {
+    border-top: 0;
+}
+
+.people-suggestion-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.people-suggestion-info strong {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.people-suggestion-info span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.people-suggestion-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 11px;
+    background: var(--soft);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.people-suggestion-add:hover {
+    background: var(--orange-t);
+}
+
+.people-suggestion-add:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1180px) {
+    .people-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .people-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .people-form-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .people-form-submit {
+        width: 100%;
+    }
+
+    .person-head {
+        display: none;
+    }
+
+    .person-row,
+    .person-row.is-editing {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 10px;
+        padding: 16px;
+    }
+
+    .person-row.is-editing {
+        margin: 0;
+    }
+
+    .person-cell-actions {
+        justify-content: flex-start;
+    }
 }
 
 /* leitura da nota (w04) */

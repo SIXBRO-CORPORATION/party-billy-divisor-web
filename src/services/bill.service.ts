@@ -1,4 +1,5 @@
 import { httpClient } from '../utils/http-client.ts';
+import type { RequestConfig } from '../utils/http-client.ts';
 import type {
     Bill,
     BillParticipant,
@@ -15,8 +16,8 @@ export const billService = {
         return response.data ?? [];
     },
 
-    getById: async (billId: string): Promise<Bill> => {
-        const response = await httpClient.get<Bill>(`/bills/${billId}`);
+    getById: async (billId: string, config?: RequestConfig): Promise<Bill> => {
+        const response = await httpClient.get<Bill>(`/bills/${billId}`, config);
 
         return response.data!;
     },

@@ -4,7 +4,7 @@ import type { ApiResponse } from '../types/api.ts';
 const API_BASE_URL =
     import.meta.env.VITE_API_URL ?? 'https://billy-divisor.onrender.com/api';
 
-interface RequestConfig extends RequestInit {
+export interface RequestConfig extends RequestInit {
     skipAuth?: boolean;
     skipToast?: boolean;
 }

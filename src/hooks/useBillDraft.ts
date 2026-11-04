@@ -32,8 +32,9 @@ export function useBillDraft() {
         setDraft((current) => ({ ...current, payerId }));
     }, []);
 
-    const addPerson = useCallback((name: string) => {
+    const addPerson = useCallback((name: string, phone?: string) => {
         const trimmed = name.trim();
+        const trimmedPhone = phone?.trim();
 
         if (!trimmed) {
             return;
@@ -50,10 +51,37 @@ export function useBillDraft() {
 
             return {
                 ...current,
-                persons: [...current.persons, { id: getNextId(current.persons), name: trimmed }],
+                persons: [
+                    ...current.persons,
+                    {
+                        id: getNextId(current.persons),
+                        name: trimmed,
+                        phone: trimmedPhone || undefined,
+                    },
+                ],
             };
         });
     }, []);
+
+    const updatePerson = useCallback(
+        (personId: number, changes: { name: string; phone?: string }) => {
+            const trimmed = changes.name.trim();
+
+            if (!trimmed) {
+                return;
+            }
+
+            setDraft((current) => ({
+                ...current,
+                persons: current.persons.map((person) =>
+                    person.id === personId
+                        ? { ...person, name: trimmed, phone: changes.phone?.trim() || undefined }
+                        : person
+                ),
+            }));
+        },
+        []
+    );
 
     const removePerson = useCallback((personId: number) => {
         setDraft((current) => ({
@@ -143,6 +171,7 @@ export function useBillDraft() {
         setDate,
         setPayerId,
         addPerson,
+        updatePerson,
         removePerson,
         addProduct,
         addProducts,

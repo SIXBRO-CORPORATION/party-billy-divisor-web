@@ -5,6 +5,7 @@ import BillDetailsStep from '../components/bill/BillDetailsStep.tsx';
 import BillItemsStep from '../components/bill/BillItemsStep.tsx';
 import type { ItemsMethod } from '../components/bill/ItemsMethodPicker.tsx';
 import NewBillHeader from '../components/bill/NewBillHeader.tsx';
+import PeopleStep from '../components/bill/PeopleStep.tsx';
 import PersonForm from '../components/bill/PersonForm.tsx';
 import PersonCard from '../components/bill/PersonCard.tsx';
 import ProductCard from '../components/bill/ProductCard.tsx';
@@ -14,8 +15,9 @@ import SplitPreview from '../components/bill/SplitPreview.tsx';
 import { Button } from '../components/ui/Button.tsx';
 import { useAuth } from '../hooks/useAuth.ts';
 import { useBillDraft } from '../hooks/useBillDraft.ts';
-import { useCreateBill } from '../hooks/useBills.ts';
+import { useBills, useCreateBill } from '../hooks/useBills.ts';
 import { useReceiptScan } from '../hooks/useReceiptScan.ts';
+import { useRecentCollaborators } from '../hooks/useRecentCollaborators.ts';
 import { useToast } from '../hooks/useToast.ts';
 import { buildSplitShareData } from '../utils/shareText.ts';
 import {
@@ -28,7 +30,7 @@ import {
     todayISODate,
 } from '../utils/utils.ts';
 
-type Step = 'details' | 'scan' | 'items' | 'people';
+type Step = 'details' | 'scan' | 'items' | 'people' | 'review';
 
 interface ReceiptPhoto {
     url: string;
@@ -43,6 +45,7 @@ export default function NewBillPage() {
         setDate,
         setPayerId,
         addPerson,
+        updatePerson,
         removePerson,
         addProduct,
         addProducts,
@@ -53,6 +56,7 @@ export default function NewBillPage() {
     } = useBillDraft();
 
     const { createBill, isCreating } = useCreateBill();
+    const { bills } = useBills();
     const navigate = useNavigate();
     const toast = useToast();
     const { user } = useAuth();
@@ -96,6 +100,11 @@ export default function NewBillPage() {
     });
 
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+
+    const { suggestions, isLoading: suggestionsLoading } = useRecentCollaborators(
+        bills,
+        draft.persons.map((person) => person.name)
+    );
 
     const split = calculateBillSplit(draft);
 
@@ -179,7 +188,7 @@ export default function NewBillPage() {
         }
     }
 
-    if (step !== 'people') {
+    if (step !== 'review') {
         const itemsSubtitle =
             scannedCount === null
                 ? 'Adicione, edite ou remova itens antes de continuar.'
@@ -258,6 +267,30 @@ export default function NewBillPage() {
                         />
                     </>
                 )}
+
+                {step === 'people' && (
+                    <>
+                        <NewBillHeader
+                            current={3}
+                            title="Quem tá na mesa?"
+                            subtitle="Adicione todo mundo que vai dividir a conta."
+                            trail="Pessoas"
+                        />
+
+                        <PeopleStep
+                            persons={draft.persons}
+                            payerId={draft.payerId}
+                            products={draft.products}
+                            suggestions={suggestions}
+                            suggestionsLoading={suggestionsLoading}
+                            onAddPerson={addPerson}
+                            onUpdatePerson={updatePerson}
+                            onRemovePerson={removePerson}
+                            onBack={() => setStep('items')}
+                            onContinue={() => setStep('review')}
+                        />
+                    </>
+                )}
             </div>
         );
     }
@@ -301,6 +334,10 @@ export default function NewBillPage() {
 
                     <Button variant="outline" size="sm" onClick={() => setStep('items')}>
                         Editar itens
+                    </Button>
+
+                    <Button variant="outline" size="sm" onClick={() => setStep('people')}>
+                        Editar pessoas
                     </Button>
                 </div>
             </section>
