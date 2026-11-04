@@ -159,6 +159,19 @@ export function useBillDraft() {
         }));
     }, []);
 
+    const splitAllEqually = useCallback(() => {
+        setDraft((current) => ({
+            ...current,
+            relations: current.products.flatMap((product) =>
+                current.persons.map((person) => ({ personId: person.id, productId: product.id }))
+            ),
+        }));
+    }, []);
+
+    const clearRelations = useCallback(() => {
+        setDraft((current) => ({ ...current, relations: [] }));
+    }, []);
+
     const reset = useCallback(() => {
         clearDraft();
         setDraft({ ...emptyDraft });
@@ -178,6 +191,8 @@ export function useBillDraft() {
         updateProduct,
         removeProduct,
         setProductParticipants,
+        splitAllEqually,
+        clearRelations,
         reset,
     };
 }

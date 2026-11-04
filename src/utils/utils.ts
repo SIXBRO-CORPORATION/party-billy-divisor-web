@@ -175,6 +175,27 @@ export function calculateBillSplit(draft: BillDraft): SplitResult {
     };
 }
 
+export function calculatePersonTotals(
+    draft: Pick<BillDraft, "persons" | "products" | "relations">
+): Map<number, number> {
+    const totalsInCents = new Map<number, number>(draft.persons.map((person) => [person.id, 0]));
+
+    for (const product of draft.products) {
+        const participantIds = draft.relations
+            .filter((relation) => relation.productId === product.id)
+            .map((relation) => relation.personId)
+            .filter((personId) => totalsInCents.has(personId));
+
+        const shares = splitEvenly(roundMoney(product.unitPrice * product.quantity), participantIds.length);
+
+        participantIds.forEach((personId, index) => {
+            totalsInCents.set(personId, (totalsInCents.get(personId) ?? 0) + Math.round(shares[index] * 100));
+        });
+    }
+
+    return new Map([...totalsInCents].map(([personId, cents]) => [personId, cents / 100]));
+}
+
 export function draftToCreateBillRequest(draft: BillDraft): CreateBillRequest {
     return {
         title: draft.title.trim(),

@@ -11,7 +11,7 @@ export interface ItemValues {
     quantity: number;
 }
 
-function ItemTile({ name, index }: { name: string; index: number }) {
+export function ItemTile({ name, index }: { name: string; index: number }) {
     return (
         <span className={`item-tile ${index % 2 === 0 ? 'is-orange' : 'is-green'}`} aria-hidden="true">
             {getProductEmoji(name)}

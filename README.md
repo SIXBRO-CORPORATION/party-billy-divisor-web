@@ -65,8 +65,11 @@ src/
    `docs/system-design/html/w03-nova-conta.html`. O passo **Itens** vem em seguida:
    ao escolher "Ler a nota fiscal" a foto passa por **Escanear nota** (`w04-escanear`) e
    cai em **Confira os itens** (`w05-conferir-itens`), onde cada item pode ser editado,
-   removido ou adicionado (também é o caminho da entrada manual). Depois vêm pessoas e
-   vínculos. O rascunho fica no `localStorage` e mostra uma prévia da divisão
+   removido ou adicionado (também é o caminho da entrada manual). Depois vem **Pessoas**
+   (`w06-pessoas`) e **Consumo** (`w07-consumo`): uma matriz item × pessoa em que cada
+   clique marca quem consumiu o item e os valores por pessoa se ajustam na hora (há
+   atalhos "Dividir tudo igual" e "Limpar"; todo item precisa de ao menos uma pessoa
+   para seguir). O rascunho fica no `localStorage` e mostra uma prévia da divisão
    calculada com a mesma regra do backend (sobra de centavos para o primeiro
    participante). Ao salvar, vira um `POST /bills` com `participant_names` por
    item. Local, data e quem pagou ainda não existem na API: ficam só no rascunho.

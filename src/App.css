@@ -3613,3 +3613,237 @@
         flex: 1;
     }
 }
+
+/* ---------- passo 4: consumo (w07) ---------- */
+
+.consumption-card {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.consumption-head {
+    flex-wrap: wrap;
+}
+
+.consumption-head-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.consumption-scroll {
+    overflow-x: auto;
+}
+
+.consumption-table {
+    --consumption-columns: minmax(0, 2.2fr) minmax(0, 1fr)
+        repeat(var(--consumption-people), minmax(0, 1fr)) minmax(0, 1fr);
+
+    min-width: calc(300px + var(--consumption-people) * 72px + 100px);
+}
+
+.consumption-head-row,
+.consumption-row,
+.consumption-total-row {
+    display: grid;
+    grid-template-columns: var(--consumption-columns);
+    align-items: center;
+    column-gap: 12px;
+    padding: 0 16px;
+}
+
+.consumption-head-row {
+    height: 62px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+}
+
+.consumption-person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.consumption-person b {
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--muted);
+}
+
+.consumption-row {
+    min-height: 76px;
+    border-top: 1.5px solid var(--line);
+    background: var(--surface);
+}
+
+.consumption-cell-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    background: inherit;
+}
+
+.consumption-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.consumption-item-info .item-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.consumption-item-qty {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.consumption-cell-value {
+    font-size: 15px;
+}
+
+.consumption-cell-toggle {
+    display: flex;
+    justify-content: center;
+}
+
+.consumption-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px dashed #cbbfb3;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.1s ease;
+}
+
+.consumption-toggle:hover:not(.is-on) {
+    border-color: var(--orange);
+    background: var(--orange-t);
+}
+
+.consumption-toggle:active {
+    transform: scale(0.94);
+}
+
+.consumption-toggle:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
+}
+
+.consumption-toggle.is-on {
+    border: 0;
+    box-shadow: 0 4px 10px rgba(80, 40, 0, 0.14);
+}
+
+.consumption-cell-each {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: right;
+}
+
+.consumption-head-row .consumption-cell-each {
+    display: block;
+}
+
+.consumption-cell-each b {
+    font-size: 14px;
+}
+
+.consumption-each-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.consumption-each-missing {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--red-d);
+}
+
+.consumption-total-row {
+    min-height: 78px;
+    border-top: 1.5px solid #f7dfc3;
+    background: #fff4ea;
+}
+
+.consumption-total-row > * {
+    min-width: 0;
+}
+
+.consumption-total-label {
+    font-family: var(--font-display);
+    font-size: 16px;
+}
+
+.consumption-total-sum {
+    font-size: 16px;
+}
+
+.consumption-person-total {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--orange-d);
+}
+
+@media (max-width: 720px) {
+    .consumption-head-actions {
+        justify-content: flex-start;
+    }
+
+    /* A tabela rola na horizontal; o item fica fixo à esquerda. */
+    .consumption-head-row > :first-child,
+    .consumption-cell-item,
+    .consumption-total-label {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        margin-left: -16px;
+        padding-left: 16px;
+        background: inherit;
+    }
+
+    .consumption-table {
+        --consumption-columns: 200px 100px repeat(var(--consumption-people), 72px) 100px;
+    }
+
+    .consumption-total-row {
+        background: #fff4ea;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .consumption-toggle {
+        transition: none;
+    }
+}

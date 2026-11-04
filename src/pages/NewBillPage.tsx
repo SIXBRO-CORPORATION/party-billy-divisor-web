@@ -3,6 +3,7 @@ import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BillDetailsStep from '../components/bill/BillDetailsStep.tsx';
 import BillItemsStep from '../components/bill/BillItemsStep.tsx';
+import ConsumptionStep from '../components/bill/ConsumptionStep.tsx';
 import type { ItemsMethod } from '../components/bill/ItemsMethodPicker.tsx';
 import NewBillHeader from '../components/bill/NewBillHeader.tsx';
 import PeopleStep from '../components/bill/PeopleStep.tsx';
@@ -30,7 +31,7 @@ import {
     todayISODate,
 } from '../utils/utils.ts';
 
-type Step = 'details' | 'scan' | 'items' | 'people' | 'review';
+type Step = 'details' | 'scan' | 'items' | 'people' | 'consumption' | 'review';
 
 interface ReceiptPhoto {
     url: string;
@@ -52,6 +53,8 @@ export default function NewBillPage() {
         updateProduct,
         removeProduct,
         setProductParticipants,
+        splitAllEqually,
+        clearRelations,
         reset,
     } = useBillDraft();
 
@@ -287,6 +290,28 @@ export default function NewBillPage() {
                             onUpdatePerson={updatePerson}
                             onRemovePerson={removePerson}
                             onBack={() => setStep('items')}
+                            onContinue={() => setStep('consumption')}
+                        />
+                    </>
+                )}
+
+                {step === 'consumption' && (
+                    <>
+                        <NewBillHeader
+                            current={4}
+                            title="Quem consumiu o quê?"
+                            subtitle="Clique nas pessoas de cada item. Os valores se ajustam na hora."
+                            trail="Consumo"
+                        />
+
+                        <ConsumptionStep
+                            persons={draft.persons}
+                            products={draft.products}
+                            relations={draft.relations}
+                            onSetProductParticipants={setProductParticipants}
+                            onSplitAll={splitAllEqually}
+                            onClear={clearRelations}
+                            onBack={() => setStep('people')}
                             onContinue={() => setStep('review')}
                         />
                     </>
@@ -338,6 +363,10 @@ export default function NewBillPage() {
 
                     <Button variant="outline" size="sm" onClick={() => setStep('people')}>
                         Editar pessoas
+                    </Button>
+
+                    <Button variant="outline" size="sm" onClick={() => setStep('consumption')}>
+                        Editar consumo
                     </Button>
                 </div>
             </section>
