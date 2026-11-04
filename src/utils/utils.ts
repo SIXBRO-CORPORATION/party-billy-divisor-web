@@ -98,6 +98,12 @@ export function roundMoney(value: number): number {
     return Math.round(value * 100) / 100;
 }
 
+export const SERVICE_FEE_RATE = 0.1;
+
+export function calculateServiceFee(amount: number, rate: number = SERVICE_FEE_RATE): number {
+    return roundMoney(amount * rate);
+}
+
 export function getNextId(items: { id: number }[]): number {
     return items.reduce((maxId, item) => Math.max(maxId, item.id), 0) + 1;
 }

@@ -331,3 +331,16 @@ export function CloseIcon(props: IconProps) {
         </svg>
     );
 }
+
+export function WhatsAppIcon(props: IconProps) {
+    return (
+        <svg {...createIconProps({ strokeWidth: 2.4, ...props, viewBox: '0 0 32 32' })}>
+            <path d="M16 3.2C8.9 3.2 3.2 8.8 3.2 15.8c0 2.4.7 4.7 1.9 6.6L3.5 28.8l6.6-1.6c1.8 1 3.8 1.5 5.9 1.5 7.1 0 12.8-5.6 12.8-12.6S23.1 3.2 16 3.2z" />
+            <path
+                d="M11.6 9.8c.4-.4 1-.3 1.3.2l1 2c.2.4.1.8-.2 1.1l-.7.7c.9 1.7 2.2 3 3.9 3.9l.7-.7c.3-.3.7-.4 1.1-.2l2 1c.5.3.6.9.2 1.3-1 1.2-2.5 1.7-4.1 1.2-3.6-1.2-6.2-3.8-7.4-7.4-.4-1.5 0-3 1.2-4.1z"
+                fill="currentColor"
+                stroke="none"
+            />
+        </svg>
+    );
+}

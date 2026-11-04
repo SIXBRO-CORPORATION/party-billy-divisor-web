@@ -3847,3 +3847,266 @@
         transition: none;
     }
 }
+
+/* ---------- passo 5: resumo (w08) ---------- */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+.summary-people {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.summary-person {
+    padding: 20px 22px;
+    background: var(--surface);
+    border-radius: 22px;
+    box-shadow: var(--sh);
+}
+
+.summary-person-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.summary-person-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.summary-person-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.summary-person-name {
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.summary-person-count {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.summary-person-total {
+    flex: none;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+}
+
+.summary-items {
+    margin: 12px 0 0;
+    padding: 8px 0 0;
+    border-top: 1.5px dashed var(--line2);
+    list-style: none;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.summary-item-emoji {
+    width: 22px;
+    flex: none;
+}
+
+.summary-item-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.summary-item-divisor {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.summary-item-value {
+    width: 76px;
+    flex: none;
+    text-align: right;
+}
+
+.summary-item-empty,
+.summary-item-service {
+    color: var(--muted);
+}
+
+.summary-item-service .summary-item-value {
+    color: var(--ink);
+}
+
+.summary-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.summary-total {
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 22px;
+    box-shadow: var(--sh);
+}
+
+.summary-eyebrow {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.summary-total-value {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    color: var(--orange-600);
+}
+
+.summary-total-details {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.summary-service {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1.5px dashed var(--line2);
+}
+
+.summary-service .ds-switch {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.summary-service .ds-switch-label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.summary-service-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--muted);
+}
+
+.summary-average {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.summary-average span {
+    color: var(--muted);
+}
+
+.summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.summary-actions .btn {
+    width: 100%;
+}
+
+.summary-actions .btn-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn.summary-whatsapp {
+    height: 58px;
+    font-size: 17px;
+    background: var(--green-d);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(11, 122, 75, 0.26);
+}
+
+.btn.summary-whatsapp:hover:not(:disabled) {
+    background: #096a41;
+}
+
+.summary-missing {
+    max-width: 560px;
+}
+
+.summary-missing-text {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+@media (max-width: 1180px) {
+    .summary-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .summary-people {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .summary-person {
+        padding: 18px;
+    }
+
+    .summary-total-value {
+        font-size: 38px;
+    }
+}

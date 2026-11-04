@@ -69,7 +69,10 @@ src/
    (`w06-pessoas`) e **Consumo** (`w07-consumo`): uma matriz item × pessoa em que cada
    clique marca quem consumiu o item e os valores por pessoa se ajustam na hora (há
    atalhos "Dividir tudo igual" e "Limpar"; todo item precisa de ao menos uma pessoa
-   para seguir). O rascunho fica no `localStorage` e mostra uma prévia da divisão
+   para seguir). Por fim, o **Resumo** (`w08-resumo`) mostra um card por pessoa com os itens
+   e as frações (`÷N`), o total da conta, a média por pessoa e um toggle de 10% de serviço
+   (vale só para o resumo e para o texto compartilhado, a API não tem esse campo), com
+   atalhos para compartilhar no WhatsApp, copiar o resumo e salvar a conta. O rascunho fica no `localStorage` e mostra uma prévia da divisão
    calculada com a mesma regra do backend (sobra de centavos para o primeiro
    participante). Ao salvar, vira um `POST /bills` com `participant_names` por
    item. Local, data e quem pagou ainda não existem na API: ficam só no rascunho.

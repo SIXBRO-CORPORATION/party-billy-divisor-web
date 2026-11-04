@@ -7,31 +7,17 @@ import ConsumptionStep from '../components/bill/ConsumptionStep.tsx';
 import type { ItemsMethod } from '../components/bill/ItemsMethodPicker.tsx';
 import NewBillHeader from '../components/bill/NewBillHeader.tsx';
 import PeopleStep from '../components/bill/PeopleStep.tsx';
-import PersonForm from '../components/bill/PersonForm.tsx';
-import PersonCard from '../components/bill/PersonCard.tsx';
-import ProductCard from '../components/bill/ProductCard.tsx';
 import ReceiptScanStep from '../components/bill/ReceiptScanStep.tsx';
-import { ShareButton } from '../components/bill/ShareButton.tsx';
-import SplitPreview from '../components/bill/SplitPreview.tsx';
-import { Button } from '../components/ui/Button.tsx';
+import SummaryStep from '../components/bill/SummaryStep.tsx';
 import { useAuth } from '../hooks/useAuth.ts';
 import { useBillDraft } from '../hooks/useBillDraft.ts';
 import { useBills, useCreateBill } from '../hooks/useBills.ts';
 import { useReceiptScan } from '../hooks/useReceiptScan.ts';
 import { useRecentCollaborators } from '../hooks/useRecentCollaborators.ts';
 import { useToast } from '../hooks/useToast.ts';
-import { buildSplitShareData } from '../utils/shareText.ts';
-import {
-    calculateBillSplit,
-    capitalize,
-    draftToCreateBillRequest,
-    formatDayLabel,
-    formatMoney,
-    getBillPayer,
-    todayISODate,
-} from '../utils/utils.ts';
+import { calculateBillSplit, draftToCreateBillRequest, todayISODate } from '../utils/utils.ts';
 
-type Step = 'details' | 'scan' | 'items' | 'people' | 'consumption' | 'review';
+type Step = 'details' | 'scan' | 'items' | 'people' | 'consumption' | 'summary';
 
 interface ReceiptPhoto {
     url: string;
@@ -102,8 +88,6 @@ export default function NewBillPage() {
         setStep('items');
     });
 
-    const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
-
     const { suggestions, isLoading: suggestionsLoading } = useRecentCollaborators(
         bills,
         draft.persons.map((person) => person.name)
@@ -169,12 +153,6 @@ export default function NewBillPage() {
         setStep('details');
     }
 
-    function handleReset() {
-        reset();
-        setReceipt(null);
-        setScannedCount(null);
-    }
-
     async function handleSave() {
         if (!canSave) {
             toast.error('Falta um título e vincular pelo menos uma pessoa a cada item');
@@ -191,7 +169,7 @@ export default function NewBillPage() {
         }
     }
 
-    if (step !== 'review') {
+    if (step !== 'summary') {
         const itemsSubtitle =
             scannedCount === null
                 ? 'Adicione, edite ou remova itens antes de continuar.'
@@ -312,7 +290,7 @@ export default function NewBillPage() {
                             onSplitAll={splitAllEqually}
                             onClear={clearRelations}
                             onBack={() => setStep('people')}
-                            onContinue={() => setStep('review')}
+                            onContinue={() => setStep('summary')}
                         />
                     </>
                 )}
@@ -320,154 +298,25 @@ export default function NewBillPage() {
         );
     }
 
-    const payer = getBillPayer(draft, userName);
-    const summary = [draft.place.trim(), capitalize(formatDayLabel(date)), `Pagou: ${payer.name}`]
-        .filter(Boolean)
-        .join(' · ');
-
     return (
-        <div className="page has-save-bar">
-            <div className="page-header">
-                <div>
-                    <h1>Nova conta</h1>
-                    <p className="page-subtitle">
-                        Escaneie a nota ou cadastre na mão, junte a galera e defina quem ficou com o quê.
-                    </p>
-                </div>
+        <div className="newbill">
+            <NewBillHeader
+                current={5}
+                title="Resumo da divisão"
+                subtitle="Confira quanto cada um paga antes de enviar."
+                trail="Resumo"
+            />
 
-                <div className="page-header-actions hide-on-mobile">
-                    <Button variant="ghost" onClick={handleReset} disabled={isCreating}>
-                        Limpar
-                    </Button>
-
-                    <Button size="lg" onClick={handleSave} loading={isCreating} disabled={!canSave}>
-                        Salvar conta
-                    </Button>
-                </div>
-            </div>
-
-            <section className="panel bill-summary">
-                <div className="bill-summary-info">
-                    <strong>{draft.title.trim()}</strong>
-                    <span>{summary}</span>
-                </div>
-
-                <div className="bill-summary-actions">
-                    <Button variant="outline" size="sm" onClick={() => setStep('details')}>
-                        Editar detalhes
-                    </Button>
-
-                    <Button variant="outline" size="sm" onClick={() => setStep('items')}>
-                        Editar itens
-                    </Button>
-
-                    <Button variant="outline" size="sm" onClick={() => setStep('people')}>
-                        Editar pessoas
-                    </Button>
-
-                    <Button variant="outline" size="sm" onClick={() => setStep('consumption')}>
-                        Editar consumo
-                    </Button>
-                </div>
-            </section>
-
-            <section className="panel">
-                <div className="panel-header-row">
-                    <div className="panel-title">
-                        <span className="step-badge">1</span>
-                        <span>Itens da conta</span>
-                    </div>
-                </div>
-
-                <div className="card-list">
-                    {draft.products.length === 0 && (
-                        <p className="panel-empty">
-                            Nenhum item ainda. Use “Editar itens” para adicionar.
-                        </p>
-                    )}
-
-                    {draft.products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                            persons={draft.persons}
-                            relations={draft.relations}
-                            isAddingPeople={selectedProductId === product.id}
-                            onToggleAddPeople={(productId) =>
-                                setSelectedProductId((current) =>
-                                    current === productId ? null : productId
-                                )
-                            }
-                            onCloseAddPeople={() => setSelectedProductId(null)}
-                            onConfirmParticipants={setProductParticipants}
-                            onRemove={removeProduct}
-                        />
-                    ))}
-                </div>
-            </section>
-
-            <section className="panel">
-                <div className="panel-title">
-                    <span className="step-badge">2</span>
-                    <span>Quem estava junto</span>
-                </div>
-
-                <PersonForm onAddPerson={addPerson} />
-
-                <div className="card-list">
-                    {draft.persons.length === 0 && (
-                        <p className="panel-empty">Ninguém cadastrado ainda.</p>
-                    )}
-
-                    {draft.persons.map((person) => (
-                        <PersonCard
-                            key={person.id}
-                            person={person}
-                            products={draft.products}
-                            relations={draft.relations}
-                            onRemove={removePerson}
-                        />
-                    ))}
-                </div>
-            </section>
-
-            {draft.products.length > 0 && (
-                <section className="panel">
-                    <div className="panel-header-row">
-                        <div className="panel-title">
-                            <span className="step-badge">3</span>
-                            <span>Prévia da divisão</span>
-                        </div>
-
-                        {split.success && (
-                            <ShareButton
-                                data={buildSplitShareData(draft.title, split)}
-                                variant="ghost"
-                                size="sm"
-                            />
-                        )}
-                    </div>
-
-                    <SplitPreview result={split} />
-                </section>
-            )}
-
-            <div className="save-bar">
-                <div className="save-bar-info">
-                    <span>Total</span>
-                    <strong>R$ {split.success ? formatMoney(split.totalBill) : '0,00'}</strong>
-                </div>
-
-                <div className="save-bar-actions">
-                    <Button variant="ghost" onClick={handleReset} disabled={isCreating} size="sm">
-                        Limpar
-                    </Button>
-
-                    <Button onClick={handleSave} loading={isCreating} disabled={!canSave}>
-                        Salvar conta
-                    </Button>
-                </div>
-            </div>
+            <SummaryStep
+                title={draft.title}
+                place={draft.place}
+                payerId={draft.payerId}
+                itemsCount={draft.products.length}
+                split={split}
+                isSaving={isCreating}
+                onBack={() => setStep('consumption')}
+                onSave={handleSave}
+            />
         </div>
     );
 }
